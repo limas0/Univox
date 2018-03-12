@@ -1,0 +1,8 @@
+{
+    "Albedo": "textures/RustedIron/albedo.png",
+    "Ao": "textures/Deer/ao.png",
+    "Metallic": "textures/Deer/metallic.png",
+    "Name": "RustedDeer",
+    "Normal": "textures/Deer/normal.png",
+    "Roughness": "textures/Deer/roughness.png"
+}
