@@ -9,5 +9,12 @@
 #include <Cube.h>
 #include <Viewport.h>
 #include <RenderStatistics.h>
+#include <Mesh.h>
+#include <PrimitiveBuilder.h>
+
+#include <unordered_map>
+
+#include "Math\Math.h"
+#include "World\WorldConstants.h"
 
 #define GAME Game::game

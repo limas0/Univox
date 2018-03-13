@@ -1,7 +1,7 @@
 #pragma once
 #include "Renderer.h"
 #include "Player.h"
-#include "World.h"
+#include "World/World.h"
 
 class Game
 {

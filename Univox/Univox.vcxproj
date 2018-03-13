@@ -89,6 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WODXE11.lib;d3dx11d.lib;d3d11.lib;d3dcompiler.lib;dxgi.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -114,6 +115,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,14 +129,21 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="World\Chunk.cpp" />
+    <ClCompile Include="World\Chunk\ChunkMeshBuilder.cpp" />
+    <ClCompile Include="World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Math\Vec2.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="World\Chunk.h" />
+    <ClInclude Include="World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="World\World.h" />
+    <ClInclude Include="World\WorldConstants.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
