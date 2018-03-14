@@ -17,6 +17,7 @@ void Renderer::create()
 	auto &context = engine.getContext();
 	auto &sceneHandler = engine.getSceneHandler();
 	auto &materialHandler = engine.getMaterialHandler();
+	auto &materialLoader = engine.getMaterialLoader();
 
 	viewport.create({ 0.f, 0.f }, { (float)GAME->getWindow().getWidth(), (float)GAME->getWindow().getHeight() }, { 0.f, 1.f });
 	context.setViewport(viewport);
@@ -50,6 +51,18 @@ void Renderer::create()
 		inputLayout.addElement({ "BITANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 44, D3D11_INPUT_PER_VERTEX_DATA, 0 });
 		shader.load("../../WODXE11/resources/shaders/Standard", inputLayout, false);
 	}
+
+	static WE::Sampler sampler;
+	sampler.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	sampler.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampler.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampler.MinLOD = 0;
+	sampler.MaxLOD = D3D11_FLOAT32_MAX;
+	sampler.create();
+
+	materialLoader.loadAllFrom("../resources/", &sampler);
 
 	materialHandler.addMaterial("Wiremat", wireframeStates);
 	materialHandler.getMaterial("Wiremat")->albedoValue = { 1.f, 1.f, 1.f };

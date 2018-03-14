@@ -11,6 +11,7 @@
 #include <RenderStatistics.h>
 #include <Mesh.h>
 #include <PrimitiveBuilder.h>
+#include <Sampler.h>
 
 #include <unordered_map>
 

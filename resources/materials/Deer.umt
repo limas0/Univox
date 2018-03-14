@@ -1,8 +1,0 @@
-{
-    "Albedo": "textures/Deer/albedo.png",
-    "Ao": "textures/Deer/ao.png",
-    "Metallic": "textures/Deer/metallic.png",
-    "Name": "Deer",
-    "Normal": "textures/Deer/normal.png",
-    "Roughness": "textures/Deer/roughness.png"
-}

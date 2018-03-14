@@ -1,8 +1,8 @@
 {
-    "Albedo": "textures/RustedIron/albedo.png",
-    "Ao": "textures/RustedIron/ao.png",
-    "Metallic": "textures/RustedIron/metallic.png",
+    "Albedo": "textures/RustedIron512/albedo.png",
+    "Ao": "textures/RustedIron512/ao.png",
+    "Metallic": "textures/RustedIron512/metallic.png",
     "Name": "RustedIron",
-    "Normal": "textures/RustedIron/normal.png",
-    "Roughness": "textures/RustedIron/roughness.png"
+    "Normal": "textures/RustedIron512/normal.png",
+    "Roughness": "textures/RustedIron512/roughness.png"
 }

@@ -26,7 +26,10 @@ void Chunk::create(Vec2i &index)
 		{
 			for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 			{
-				blocks[i][j][k] = true;
+				if (std::rand() % 10 < 5)
+					blocks[i][j][k] = true;
+				else
+					blocks[i][j][k] = false;
 			}
 		}
 	}
