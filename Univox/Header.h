@@ -19,3 +19,5 @@
 #include "World\WorldConstants.h"
 
 #define GAME Game::game
+
+using WE::Mesh;

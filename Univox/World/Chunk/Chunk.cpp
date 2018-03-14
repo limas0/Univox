@@ -1,8 +1,8 @@
 #include "Chunk.h"
-#include "Chunk\ChunkMeshBuilder.h"
+#include "ChunkMeshBuilder.h"
 
 Chunk::Chunk() :
-	WE::Mesh()
+	Mesh()
 {
 }
 
@@ -26,13 +26,15 @@ void Chunk::create(Vec2i &index)
 		{
 			for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 			{
-				if (std::rand() % 10 < 5)
-					blocks[i][j][k] = true;
+				if ((i / 4 % 2 == 0) && (j / 2 % 2 == 0) && (k / 1 % 2 == 0))
+					m_data.blocks[translateIndex(i, j, k)] = true;
 				else
-					blocks[i][j][k] = false;
+					m_data.blocks[translateIndex(i, j, k)] = false;
 			}
 		}
 	}
+
+
 
 	ChunkMeshBuilder(this).build();
 

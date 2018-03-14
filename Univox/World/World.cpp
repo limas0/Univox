@@ -15,12 +15,14 @@ void World::create()
 	scene = sceneHandler.addScene("World");
 	sceneHandler.setActiveScene(scene);
 
-	for (float i = 0; i < 1; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (float k = 0; k < 1; k++)
+		for (int k = 0; k < 1; k++)
 		{
 			Chunk *chunk = new Chunk();
 			chunk->create(Vec2i(i, k));
+			//auto data = chunk->getChunkData().serialize();
+			//chunk->getChunkData().deserialize(data);
 			chunk->setMaterial("Default");
 			chunk->setTranslation({ float(i * Consts::CHUNK_SIZE), 0.f, float(k * Consts::CHUNK_SIZE) });
 			chunks.emplace(std::make_pair(Vec2i(i, k), chunk));

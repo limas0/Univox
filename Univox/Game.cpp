@@ -47,7 +47,7 @@ void Game::run()
 		renderStats.draw();
 
 		ImGui::SetNextWindowBgAlpha(0.f);
-		ImGui::SetNextWindowSize(ImVec2(window.getWidth(), window.getHeight()));
+		ImGui::SetNextWindowSize(ImVec2(float(window.getWidth()), float(window.getHeight())));
 		ImGui::SetNextWindowPos(ImVec2(-5.f, -5.f));
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.f);
 		ImGui::Begin("Top left info", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus);

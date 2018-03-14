@@ -1,5 +1,5 @@
 #include "ChunkMeshBuilder.h"
-#include "../Chunk.h"
+#include "Chunk.h"
 
 ChunkMeshBuilder::ChunkMeshBuilder(Chunk *chunk) :
 	p_chunk(chunk)

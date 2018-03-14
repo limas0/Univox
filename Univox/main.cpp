@@ -3,6 +3,8 @@
 
 int main()
 {
+	std::srand(unsigned int(time(NULL)));
+
 	Game game;
 	game.create();
 	game.run();

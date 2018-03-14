@@ -127,21 +127,26 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="World\Chunk.cpp" />
+    <ClCompile Include="World\Chunk\Chunk.cpp" />
+    <ClCompile Include="World\Chunk\ChunkData.cpp" />
     <ClCompile Include="World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="IO\Serializable.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vec2.h" />
     <ClInclude Include="Math\Vec3.h" />
+    <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="World\Chunk.h" />
+    <ClInclude Include="World\Chunk\Chunk.h" />
+    <ClInclude Include="World\Chunk\ChunkData.h" />
     <ClInclude Include="World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldConstants.h" />
