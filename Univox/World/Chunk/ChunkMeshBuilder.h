@@ -2,6 +2,7 @@
 #include "../../Header.h"
 
 class Chunk;
+class ChunkMesh;
 
 struct AdjacentBlocks
 {
@@ -16,7 +17,7 @@ struct AdjacentBlocks
 class ChunkMeshBuilder
 {
 public:
-	ChunkMeshBuilder(Chunk *chunk);
+	ChunkMeshBuilder(Chunk *chunk, ChunkMesh *chunkMesh);
 	~ChunkMeshBuilder();
 
 	void build();
@@ -26,4 +27,5 @@ public:
 
 private:
 	Chunk *p_chunk = nullptr;
+	ChunkMesh *p_mesh = nullptr;
 };

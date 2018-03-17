@@ -1,9 +1,8 @@
 #include "Chunk.h"
-#include "ChunkMeshBuilder.h"
 
-Chunk::Chunk() :
-	Mesh()
+Chunk::Chunk()
 {
+
 }
 
 Chunk::~Chunk()
@@ -33,27 +32,10 @@ void Chunk::create(Vec2i &index)
 			}
 		}
 	}
-
-
-
-	ChunkMeshBuilder(this).build();
-
-	boundingBox.create({ 0.f, 0.f, 0.f }, { float(Consts::CHUNK_SIZE), float(Consts::CHUNK_HEIGHT), float(Consts::CHUNK_SIZE) });
-
-	Mesh::create();
 }
 
 void Chunk::destroy()
 {
-	Mesh::destroy();
+	
 }
 
-void Chunk::update()
-{
-	Mesh::update();
-}
-
-void Chunk::draw()
-{
-	Mesh::draw();
-}

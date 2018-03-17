@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "World\Chunk\ChunkMeshBuilder.h"
+#include "World\Chunk\ChunkMesh.h"
 
 Game *Game::game = nullptr;
 
@@ -15,15 +17,41 @@ void Game::create()
 {
 	window.create("Univox", 1280, 720);
 	renderer.create();
+
+	auto &sceneHandler = renderer.getEngine().getSceneHandler();
+
+	worldRenderer.create(sceneHandler.addScene("World"));
+	sceneHandler.setActiveScene(worldRenderer.getScene());
+
 	player.create();
+	worldRenderer.getScene()->setActiveCamera(player.getCamera());
 
 	world.create();
+
+	{
+		Chunk *chunk = new Chunk();
+		chunk->create(Vec2i(0, 0));
+
+		world.setChunk(Vec2i(0, 0), chunk);
+
+		ChunkMesh *chunkMesh = new ChunkMesh();
+		ChunkMeshBuilder(chunk, chunkMesh).build();
+		chunkMesh->create();
+
+		chunkMesh->setMaterial("Default");
+		chunkMesh->setTranslation({ float(0 * Consts::CHUNK_SIZE), 0.f, float(0 * Consts::CHUNK_SIZE) });
+
+		worldRenderer.setChunkMesh(Vec2i(0, 0), chunkMesh);
+	}
+
+	std::cout << typeid(Game).hash_code() << std::endl;
 }
 
 void Game::destroy()
 {
 	world.destroy();
 	player.destroy();
+	worldRenderer.destroy();
 	renderer.destroy();
 	window.destroy();
 }

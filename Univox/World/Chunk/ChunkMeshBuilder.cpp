@@ -1,8 +1,10 @@
 #include "ChunkMeshBuilder.h"
 #include "Chunk.h"
+#include "ChunkMesh.h"
 
-ChunkMeshBuilder::ChunkMeshBuilder(Chunk *chunk) :
-	p_chunk(chunk)
+ChunkMeshBuilder::ChunkMeshBuilder(Chunk *chunk, ChunkMesh *chunkMesh) :
+	p_chunk(chunk),
+	p_mesh(chunkMesh)
 {
 
 }
@@ -28,19 +30,19 @@ void ChunkMeshBuilder::build()
 						auto adjBlocks = getAdjacentBlocks(Vec3i(i, j, k));
 
 						if(adjBlocks.left == false)
-						p_chunk->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 1.f, 0.f, 0.f });
+							p_mesh->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 1.f, 0.f, 0.f });
 						if (adjBlocks.right == false)
-						p_chunk->addQuad({ float(i) + 1.f, float(j), float(k) }, { 1.f, 1.f }, { -1.f, 0.f, 0.f });
+							p_mesh->addQuad({ float(i) + 1.f, float(j), float(k) }, { 1.f, 1.f }, { -1.f, 0.f, 0.f });
 						
 						if (adjBlocks.bottom == false)
-						p_chunk->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 0.f, -1.f, 0.f });
+							p_mesh->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 0.f, -1.f, 0.f });
 						if (adjBlocks.top == false)
-						p_chunk->addQuad({ float(i), float(j) + 1.f, float(k) }, { 1.f, 1.f }, { 0.f, 1.f, 0.f });
+							p_mesh->addQuad({ float(i), float(j) + 1.f, float(k) }, { 1.f, 1.f }, { 0.f, 1.f, 0.f });
 
 						if (adjBlocks.back == false)
-						p_chunk->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 0.f, 0.f, 1.f });
+							p_mesh->addQuad({ float(i), float(j), float(k) }, { 1.f, 1.f }, { 0.f, 0.f, 1.f });
 						if (adjBlocks.front == false)
-						p_chunk->addQuad({ float(i), float(j), float(k) + 1.f }, { 1.f, 1.f }, { 0.f, 0.f, -1.f });
+							p_mesh->addQuad({ float(i), float(j), float(k) + 1.f }, { 1.f, 1.f }, { 0.f, 0.f, -1.f });
 					}
 				}
 			}

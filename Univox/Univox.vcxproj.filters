@@ -69,6 +69,15 @@
     <ClCompile Include="World\Chunk\Chunk.cpp">
       <Filter>Source Files\World\Chunk</Filter>
     </ClCompile>
+    <ClCompile Include="Network\PacketChunkData.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="World\WorldRenderer.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Chunk\ChunkMesh.cpp">
+      <Filter>Source Files\World\Chunk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
@@ -111,6 +120,15 @@
       <Filter>Header Files\World\Chunk</Filter>
     </ClInclude>
     <ClInclude Include="World\Chunk\Chunk.h">
+      <Filter>Header Files\World\Chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketChunkData.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="World\WorldRenderer.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="World\Chunk\ChunkMesh.h">
       <Filter>Header Files\World\Chunk</Filter>
     </ClInclude>
   </ItemGroup>

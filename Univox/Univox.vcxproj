@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,6 +90,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNIVOX_EXPORT_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WODXE11.lib;d3dx11d.lib;d3d11.lib;d3dcompiler.lib;dxgi.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNIVOX_EXPORT_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -128,12 +131,15 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
+    <ClCompile Include="Network\PacketChunkData.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="World\Chunk\Chunk.cpp" />
     <ClCompile Include="World\Chunk\ChunkData.cpp" />
+    <ClCompile Include="World\Chunk\ChunkMesh.cpp" />
     <ClCompile Include="World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="World\World.cpp" />
+    <ClCompile Include="World\WorldRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -143,13 +149,16 @@
     <ClInclude Include="Math\Vec2.h" />
     <ClInclude Include="Math\Vec3.h" />
     <ClInclude Include="Network\Packet.h" />
+    <ClInclude Include="Network\PacketChunkData.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="World\Chunk\Chunk.h" />
     <ClInclude Include="World\Chunk\ChunkData.h" />
+    <ClInclude Include="World\Chunk\ChunkMesh.h" />
     <ClInclude Include="World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldConstants.h" />
+    <ClInclude Include="World\WorldRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,7 @@
 #pragma once
 #include "ChunkData.h"
 
-class Chunk : public Mesh
+class Chunk
 {
 public:
 	static inline const int translateIndex(Vec3i &index);
@@ -14,9 +14,6 @@ public:
 	void create();
 	void create(Vec2i &index);
 	void destroy();
-
-	void update();
-	void draw();
 
 	inline bool getBlock(int x, int y, int z) const;
 

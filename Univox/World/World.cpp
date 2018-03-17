@@ -1,5 +1,4 @@
 #include "World.h"
-#include "../Game.h"
 
 World::World()
 {
@@ -11,30 +10,12 @@ World::~World()
 
 void World::create()
 {
-	auto &sceneHandler = GAME->getRenderer().getEngine().getSceneHandler();
-	scene = sceneHandler.addScene("World");
-	sceneHandler.setActiveScene(scene);
 
-	for (int i = 0; i < 1; i++)
-	{
-		for (int k = 0; k < 1; k++)
-		{
-			Chunk *chunk = new Chunk();
-			chunk->create(Vec2i(i, k));
-			//auto data = chunk->getChunkData().serialize();
-			//chunk->getChunkData().deserialize(data);
-			chunk->setMaterial("Default");
-			chunk->setTranslation({ float(i * Consts::CHUNK_SIZE), 0.f, float(k * Consts::CHUNK_SIZE) });
-			chunks.emplace(std::make_pair(Vec2i(i, k), chunk));
-			scene->addObject(chunk);
-		}
-	}
-
-	scene->setActiveCamera(GAME->getPlayer().getCamera());
 }
 
 void World::destroy()
 {
+
 }
 
 void World::update()
@@ -50,18 +31,20 @@ void World::update()
 	}*/
 }
 
-std::tuple<bool, ChunksMap::const_iterator> World::chunkExists(Vec2i &index) const
+void World::setChunk(Vec2i &index, Chunk *chunk)
 {
-	ChunksMap::const_iterator result = chunks.find(index);
-	return { result != chunks.end(), result };
+	if (auto[exists, iter] = getChunkIter(index); exists)
+	{
+		iter->second->destroy();
+		delete iter->second;
+		chunks.erase(iter);
+	}
+
+	chunks[index] = chunk;
 }
 
-Chunk *World::getChunk(Vec2i &index) const
+inline std::tuple<bool, World::ChunkMap::const_iterator> World::getChunkIter(Vec2i &index)
 {
-	auto[exists, iter] = chunkExists(index);
-
-	if (exists)
-		return iter->second;
-
-	return nullptr;
+	ChunkMap::iterator result = chunks.find(index);
+	return { result != chunks.end(), result };
 }

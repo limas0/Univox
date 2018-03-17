@@ -2,27 +2,11 @@
 #include "Header.h"
 #include "Chunk/Chunk.h"
 
-namespace std {
-
-template<>
-struct hash<Vec2i>
-{
-	const int operator()(const Vec2i &index) const noexcept
-	{
-		std::hash<decltype(index.x)> hasher;
-		const int valuex = int(hasher(index.x));
-		const int valuey = int(hasher(index.y));
-		return int(std::hash<decltype(index.x)>{}((valuex ^ valuey) >> 2));
-	}
-};
-
-}
-
-using ChunksMap = std::unordered_map<Vec2i, Chunk*>;
-
 class World
 {
 public:
+	using ChunkMap = std::unordered_map<Vec2i, Chunk*>;
+
 	World();
 	~World();
 
@@ -31,12 +15,18 @@ public:
 
 	void update();
 
-	std::tuple<bool, ChunksMap::const_iterator> chunkExists(Vec2i &index) const;
+	void setChunk(Vec2i &index, Chunk *chunk);
+	inline Chunk *getChunk(Vec2i &index);
 
-	Chunk *getChunk(Vec2i &index) const;
+	//[bool exists, iter]
+	inline std::tuple<bool, ChunkMap::const_iterator> getChunkIter(Vec2i &index);
 private:
-	WE::Scene *scene = nullptr;
-
-	ChunksMap chunks;
+	ChunkMap chunks;
 };
+
+inline Chunk *World::getChunk(Vec2i &index)
+{
+	ChunkMap::iterator result = chunks.find(index);
+	return result != chunks.end() ? result->second : nullptr;
+}
 
