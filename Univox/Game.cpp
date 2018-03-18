@@ -43,8 +43,6 @@ void Game::create()
 
 		worldRenderer.setChunkMesh(Vec2i(0, 0), chunkMesh);
 	}
-
-	std::cout << typeid(Game).hash_code() << std::endl;
 }
 
 void Game::destroy()

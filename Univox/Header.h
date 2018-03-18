@@ -22,11 +22,11 @@
 using WE::Mesh;
 using WE::Scene;
 
-#ifdef UNIVOX_EXPORT_API
-#define UNIVOX_API __declspec(dllexport)
-#else
-#define UNIVOX_API __declspec(dllimport)
-#endif
+//#ifdef UNIVOX_EXPORT_API
+//#define UNIVOX_API __declspec(dllexport)
+//#else
+//#define UNIVOX_API __declspec(dllimport)
+//#endif
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4251)

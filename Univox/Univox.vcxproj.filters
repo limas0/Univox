@@ -40,6 +40,12 @@
     <Filter Include="Header Files\World\Chunk">
       <UniqueIdentifier>{6eb9f765-fdff-4b97-8ca8-018ae4462752}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Network\Server">
+      <UniqueIdentifier>{93ef7d33-d28e-417a-93f3-42f0d4d8ba45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\Server">
+      <UniqueIdentifier>{06370916-31a3-439e-81de-e2024bc02b8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="World\Chunk\ChunkMesh.cpp">
       <Filter>Source Files\World\Chunk</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Server\Server.cpp">
+      <Filter>Source Files\Network\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Server\PacketDispatcher.cpp">
+      <Filter>Source Files\Network\Server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +142,18 @@
     </ClInclude>
     <ClInclude Include="World\Chunk\ChunkMesh.h">
       <Filter>Header Files\World\Chunk</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Server\Server.h">
+      <Filter>Header Files\Network\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Server\TCPServerConnection.h">
+      <Filter>Header Files\Network\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Server\ServerConstants.h">
+      <Filter>Header Files\Network\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Server\PacketDispatcher.h">
+      <Filter>Header Files\Network\Server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
