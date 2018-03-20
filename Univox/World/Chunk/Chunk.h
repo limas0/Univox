@@ -17,6 +17,7 @@ public:
 
 	inline bool getBlock(int x, int y, int z) const;
 
+	inline void setChunkData(ChunkData &data);
 	inline ChunkData &getChunkData();
 
 private:
@@ -33,6 +34,11 @@ inline bool Chunk::getBlock(int x, int y, int z) const
 		return m_data.blocks[translateIndex(x, y, z)];
 
 	return false;
+}
+
+inline void Chunk::setChunkData(ChunkData &data)
+{
+	m_data = data;
 }
 
 inline ChunkData &Chunk::getChunkData()

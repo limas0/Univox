@@ -8,5 +8,5 @@ public:
 	~Serializable() = default;
 
 	virtual std::string serialize() const = 0;
-	virtual bool deserialize(std::string data) const = 0;
+	virtual bool deserialize(std::string data) = 0;
 };

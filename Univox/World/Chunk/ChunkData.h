@@ -9,7 +9,7 @@ public:
 	~ChunkData();
 
 	std::string serialize() const;
-	bool deserialize(std::string data) const;
+	bool deserialize(std::string data);
 
 	std::array<bool, Consts::CHUNK_VOLUME> blocks;
 };

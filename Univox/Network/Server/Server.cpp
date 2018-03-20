@@ -1,5 +1,7 @@
 #include "Server.h"
 #include "../PacketChunkData.h"
+#include "../../World/WorldConstants.h"
+#include "../../World/Chunk/Chunk.h"
 
 Server::Server()
 {
@@ -21,7 +23,8 @@ void Server::destroy()
 {
 	isRunning = false;
 
-	mainThread->join();
+	if(mainThread)
+		mainThread->join();
 
 	delete mainThread;
 	mainThread = nullptr;
@@ -32,7 +35,6 @@ void Server::destroy()
 void Server::run()
 {
 	isRunning = true;
-
 	mainThread = new std::thread(&Server::loop, this);
 }
 
@@ -46,7 +48,7 @@ void Server::loop()
 
 	while (isRunning)
 	{
-		if (selector.wait(sf::seconds(1)))
+		if (selector.wait(sf::milliseconds(1000)))
 		{
 			if (selector.isReady(tcpListener))
 			{
@@ -54,18 +56,45 @@ void Server::loop()
 			}
 			else
 			{
-				if (selector.isReady(udpSocket))
-				{
-					receivePacketUDP();
-				}
-
 				for (auto it = tcpClients.begin(); it != tcpClients.end(); ++it)
 				{
 					receivePacketTCP(*it);
 				}
 
+				if (selector.isReady(udpSocket))
+				{
+					receivePacketUDP();
+				}
+
 				updateClients();
 			}
+		}
+
+		if (tcpClients.size() > 0)
+		{
+			static int el = 0;
+
+			PacketChunkData test;
+			test.index = { 0, 0 };
+
+			for (int i = 0; i < Consts::CHUNK_SIZE; i++)
+			{
+				for (int j = 0; j < Consts::CHUNK_HEIGHT; j++)
+				{
+					for (int k = 0; k < Consts::CHUNK_SIZE; k++)
+					{
+						test.chunk.blocks[Chunk::translateIndex(i, j, k)] = el == j;
+					}
+				}
+			}
+
+			test.pack();
+
+			for (auto it = tcpClients.begin(); it != tcpClients.end(); ++it)
+				(*it)->send(test.rawPacket);
+
+			el += 1;
+			el = el % (Consts::CHUNK_HEIGHT - 1);
 		}
 	}
 
@@ -113,7 +142,7 @@ void Server::handlePacket(sf::Packet *packet)
 {
 	size_t hashCode;
 	*packet >> hashCode;
-	std::cout << "Received udp packet[" << hashCode << "]" << std::endl;
+	std::cout << "Received packet[" << hashCode << "]" << std::endl;
 	
 	dispatcher.dispatchPacket(hashCode, packet);
 

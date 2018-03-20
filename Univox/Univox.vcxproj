@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Network\Client\Client.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="Network\PacketChunkData.cpp" />
     <ClCompile Include="Network\Server\PacketDispatcher.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vec2.h" />
     <ClInclude Include="Math\Vec3.h" />
+    <ClInclude Include="Network\Client\Client.h" />
     <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="Network\PacketChunkData.h" />
     <ClInclude Include="Network\Server\PacketDispatcher.h" />

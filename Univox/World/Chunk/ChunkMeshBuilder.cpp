@@ -16,6 +16,9 @@ ChunkMeshBuilder::~ChunkMeshBuilder()
 
 void ChunkMeshBuilder::build()
 {
+	WE::Timer timer;
+	timer.start();
+
 	for (int i = 0; i < Consts::CHUNK_SIZE; i++)
 	{
 		for (int j = 0; j < Consts::CHUNK_HEIGHT; j++)
@@ -48,6 +51,8 @@ void ChunkMeshBuilder::build()
 			}
 		}
 	}
+
+	std::cout << "Chunk rebuilt in " << timer.stop() << "ms" << std::endl;
 }
 
 inline bool ChunkMeshBuilder::isBlockCovered(int x, int y, int z) const

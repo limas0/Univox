@@ -29,19 +29,21 @@ void Game::create()
 	world.create();
 
 	{
-		Chunk *chunk = new Chunk();
-		chunk->create(Vec2i(0, 0));
+		Vec2i pos(0, 0);
 
-		world.setChunk(Vec2i(0, 0), chunk);
+		Chunk *chunk = new Chunk();
+		chunk->create(pos);
+
+		world.setChunk(pos, chunk);
 
 		ChunkMesh *chunkMesh = new ChunkMesh();
 		ChunkMeshBuilder(chunk, chunkMesh).build();
 		chunkMesh->create();
 
 		chunkMesh->setMaterial("Default");
-		chunkMesh->setTranslation({ float(0 * Consts::CHUNK_SIZE), 0.f, float(0 * Consts::CHUNK_SIZE) });
+		chunkMesh->setTranslation({ float(pos.x * Consts::CHUNK_SIZE), 0.f, float(pos.y * Consts::CHUNK_SIZE) });
 
-		worldRenderer.setChunkMesh(Vec2i(0, 0), chunkMesh);
+		worldRenderer.setChunkMesh(pos, chunkMesh);
 	}
 }
 
@@ -99,4 +101,14 @@ Renderer &Game::getRenderer()
 Player &Game::getPlayer()
 {
 	return player;
+}
+
+World &Game::getWorld()
+{
+	return world;
+}
+
+WorldRenderer &Game::getWorldRenderer()
+{
+	return worldRenderer;
 }

@@ -13,6 +13,7 @@
 #include <PrimitiveBuilder.h>
 #include <Sampler.h>
 #include <VertexBufferIndexed.h>
+#include <Timer.h>
 
 #include "Math\Math.h"
 #include "World\WorldConstants.h"
@@ -39,10 +40,12 @@ struct hash<Vec2i>
 {
 	const int operator()(const Vec2i &index) const noexcept
 	{
-		std::hash<decltype(index.x)> hasher;
-		const int valuex = int(hasher(index.x));
-		const int valuey = int(hasher(index.y));
-		return int(std::hash<decltype(index.x)>{}((valuex ^ valuey) >> 2));
+		std::hash<int> hasher;
+		return int(hasher(index.x) ^ hasher(index.y));
+		//std::hash<decltype(index.x)> hasher;
+		//const int valuex = int(hasher(index.x));
+		//const int valuey = int(hasher(index.y));
+		//return int(std::hash<decltype(index.x)>{}((valuex ^ valuey) >> 2));
 	}
 };
 

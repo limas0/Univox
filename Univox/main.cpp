@@ -1,4 +1,5 @@
 #include "Network\Server\Server.h"
+#include "Network\Client\Client.h"
 #include "Header.h"
 #include "Game.h"
 #include "Network\PacketChunkData.h"
@@ -11,22 +12,18 @@ int main()
 	server.create();
 	server.run();
 
-	sf::TcpSocket socket;
-	socket.connect("127.0.0.1", Consts::SERVER_TCP_PORT);
-
-	sf::UdpSocket udp;
-	udp.bind(Consts::CLIENT_UDP_PORT);
-
-	PacketChunkData test;
-	test.pack("GOLZEB DIEDIEDIEDIEDIEDIEDIE");
-
-	udp.send(test.rawPacket, "127.0.0.1", Consts::SERVER_UDP_PORT);
-
 	Game game;
 	game.create();
+
+	Client client;
+	client.create(&game);
+	client.connect();
+	client.run();
+
 	game.run();
 	game.destroy();
 
+	client.destroy();
 	server.destroy();
 
 	system("pause");

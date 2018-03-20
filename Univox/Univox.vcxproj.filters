@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Network\Server">
       <UniqueIdentifier>{06370916-31a3-439e-81de-e2024bc02b8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Network\Client">
+      <UniqueIdentifier>{9e4920a0-4323-4963-ab65-1acc8ae04dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network\Client">
+      <UniqueIdentifier>{46817015-3b17-43eb-9c12-5ac2e225b0e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Network\Server\PacketDispatcher.cpp">
       <Filter>Source Files\Network\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Client\Client.cpp">
+      <Filter>Source Files\Network\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="Network\Server\PacketDispatcher.h">
       <Filter>Header Files\Network\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Client\Client.h">
+      <Filter>Header Files\Network\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

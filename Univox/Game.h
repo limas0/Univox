@@ -21,6 +21,8 @@ public:
 
 	Renderer &getRenderer();
 	Player &getPlayer();
+	World &getWorld();
+	WorldRenderer &getWorldRenderer();
 private:
 	Renderer renderer;
 	WorldRenderer worldRenderer;

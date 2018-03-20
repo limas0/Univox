@@ -29,14 +29,16 @@ std::string ChunkData::serialize() const
 	return buffer.str();
 }
 
-bool ChunkData::deserialize(std::string data) const
+bool ChunkData::deserialize(std::string data)
 {
-	std::stringstream buffer;
+	std::stringstream buffer(data);
 	bool block = false;
+	int index = 0;
 
 	while (buffer >> block)
 	{
-		//std::cout << block << " ";
+		blocks[index] = block;
+		index++;
 	}
 
 	return true;

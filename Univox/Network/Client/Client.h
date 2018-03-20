@@ -8,39 +8,42 @@
 
 #include <SFML\Network.hpp>
 
-#include "ServerConstants.h"
-#include "PacketDispatcher.h"
+#include "..\Server\ServerConstants.h"
+#include "..\Server\PacketDispatcher.h"
 
-class Server
+class Game;
+
+class Client
 {
 public:
-	Server();
-	~Server();
+	Client();
+	~Client();
 
-	void create();
+	void create(Game *game);
 	void destroy();
 
 	void run();
 	void loop();
+
+	void connect();
+	void disconnect();
+
+	Game *getGame() const;
 private:
-	void newConnection();
-	void updateClients();
-	void disconnectAll();
+	void checkConnection();
 	void handlePacket(sf::Packet *packet);
 
-	void addClient(sf::TcpSocket *client);
-	void removeClient(sf::TcpSocket *client);
-
-	void receivePacketTCP(sf::TcpSocket *client);
+	void receivePacketTCP();
 	void receivePacketUDP();
+
+	Game *p_game = nullptr;
 
 	std::atomic<bool> isRunning = false;
 	std::thread *mainThread = nullptr;
 
 	sf::SocketSelector selector;
-	sf::TcpListener tcpListener;
+	sf::TcpSocket tcpSocket;
 	sf::UdpSocket udpSocket;
-	std::list<sf::TcpSocket*> tcpClients;
 
-	PacketDispatcher<Server> dispatcher;
+	PacketDispatcher<Client> dispatcher;
 };
