@@ -26,6 +26,27 @@ int main()
 	client.destroy();
 	server.destroy();
 
+	//constexpr int size = Consts::CHUNK_VOLUME;
+
+	//std::array<float, size> in;
+	//for (auto &v : in)
+	//{
+	//	v = 3.14f;
+	//	//std::cout << v << std::endl;
+	//}
+
+	//WE::Timer timer;
+	//timer.start();
+
+	//std::vector<char> *mid = toBytes(in.data(), in.size());
+
+	//std::array<float, size> out;
+	//fromBytes(&(*mid)[0], mid->size(), &out[0]);
+
+	//std::cout << timer.stop() << " ms" << std::endl;
+
+	//std::cout << out[12626] << std::endl;
+
 	system("pause");
 
 	return 0;

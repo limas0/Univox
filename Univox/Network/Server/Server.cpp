@@ -48,7 +48,7 @@ void Server::loop()
 
 	while (isRunning)
 	{
-		if (selector.wait(sf::milliseconds(1000)))
+		if (selector.wait(sf::milliseconds(250)))
 		{
 			if (selector.isReady(tcpListener))
 			{
@@ -92,6 +92,8 @@ void Server::loop()
 
 			for (auto it = tcpClients.begin(); it != tcpClients.end(); ++it)
 				(*it)->send(test.rawPacket);
+
+			std::cout << "Sent packet[size: " << test.rawPacket.getDataSize() << "]" << std::endl;
 
 			el += 1;
 			el = el % (Consts::CHUNK_HEIGHT - 1);

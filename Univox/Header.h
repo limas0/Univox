@@ -50,3 +50,18 @@ struct hash<Vec2i>
 };
 
 }
+
+template<typename S = std::vector<char>, typename T>
+inline S *toBytes(const T *src, const size_t count)
+{
+	S *mid = new S();
+	if constexpr(std::is_same_v<S, std::vector<char>>)
+		mid->resize(count * sizeof(T));
+	std::memcpy(&(*mid)[0], src, count * sizeof(T));
+	return mid;
+}
+
+inline void fromBytes(const char *src, const size_t count, void *dst)
+{
+	std::memcpy(dst, src, count);
+}
