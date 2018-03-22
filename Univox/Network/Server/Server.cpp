@@ -48,7 +48,7 @@ void Server::loop()
 
 	while (isRunning)
 	{
-		if (selector.wait(sf::milliseconds(250)))
+		if (selector.wait(sf::milliseconds(1000)))
 		{
 			if (selector.isReady(tcpListener))
 			{
@@ -83,7 +83,7 @@ void Server::loop()
 				{
 					for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 					{
-						test.chunk.blocks[Chunk::translateIndex(i, j, k)] = el == j;
+						test.chunk.blocks[Chunk::translateIndex(i, j, k)] = std::rand() % 5 == 1;
 					}
 				}
 			}

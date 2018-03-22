@@ -2,6 +2,7 @@
 #include "../Game.h"
 #include "../World/Chunk/ChunkMeshBuilder.h"
 #include <zlib.h>
+#include "../Utils/ByteBuffer.h"
 
 PacketChunkData::PacketChunkData():
 	Packet()
@@ -20,47 +21,17 @@ void PacketChunkData::pack()
 	Packet::pack<PacketChunkData>();
 	
 	rawPacket << index.x << index.y;
-	//std::string data = chunk.serialize();
-	//rawPacket << data;
 
-	std::vector<char> *data = toBytes(&chunk.blocks[0], Consts::CHUNK_VOLUME);
+	ByteBuffer data;
+	chunk.serialize(data);
+	
+	ByteBuffer compressed;
+	data.compress(compressed);
 
-	z_stream s;
-	memset(&s, 0, sizeof(s));
-
-	if (deflateInit(&s, Z_DEFAULT_COMPRESSION))
-		std::cout << "deflate init error" << std::endl;
-
-	s.next_in = (Bytef*)data->data();//(Bytef*)data.data();
-	s.avail_in = data->size();
-	//std::cout << "total in: " << data.size() << std::endl;
-
-	int ret;
-	char outbuffer[32768];
-	std::string outdata;
-
-	do
-	{
-		s.next_out = reinterpret_cast<Bytef*>(outbuffer);
-		s.avail_out = sizeof(outbuffer);
-
-		ret = deflate(&s, Z_FINISH);
-
-		std::cout << "total out: " << s.total_out << std::endl;
-		outdata.append(outbuffer, s.total_out);
-	} while (ret == Z_OK);
-
-	deflateEnd(&s);
-
-	if (ret != Z_STREAM_END) {
-		std::cout << "error: " << s.msg << std::endl;
-	}
-
-	rawPacket << outdata;
+	rawPacket << sf::Uint32(compressed.getSizeInBytes());
+	rawPacket.append(compressed.getBytes(), compressed.getSizeInBytes());
 
 	std::cout << "PacketChunkData packed in " << timer.stop() << "ms" << std::endl;
-
-	delete data;
 }
 
 void PacketChunkData::unpack()
@@ -69,43 +40,16 @@ void PacketChunkData::unpack()
 	timer.start();
 
 	rawPacket >> index.x >> index.y;
-	std::string data;
+	std::string data;//DO NOT COUT | NO NULL TERMINATOR
 	rawPacket >> data;
+
+	ByteBuffer buffer;
+	buffer.fromString(data);
 	
-	std::cout << "inflate total in:" << data.size() << std::endl;
+	ByteBuffer decompressed(Consts::CHUNK_VOLUME);
+	buffer.decompress(decompressed);
 
-	z_stream s;
-	memset(&s, 0, sizeof(s));
-
-	if (inflateInit(&s, Z_DEFAULT_COMPRESSION))
-		std::cout << "inflate init error" << std::endl;
-
-	s.next_in = (Bytef*)data.data();
-	s.avail_in = data.size();
-
-	int ret;
-	char outbuffer[135000];
-	std::string outdata;
-
-	do
-	{
-		s.next_out = reinterpret_cast<Bytef*>(outbuffer);
-		s.avail_out = sizeof(outbuffer);
-
-		ret = inflate(&s, 0);
-
-		//std::cout << "inflate total out: " << s.total_out << std::endl;
-		outdata.append(outbuffer, s.total_out);
-	} while (ret == Z_OK);
-
-	inflateEnd(&s);
-
-	if (ret != Z_STREAM_END) {
-		std::cout << "error: " << s.msg << std::endl;
-	}
-
-	fromBytes(outdata.data(), outdata.size(), &chunk.blocks[0]);
-	//chunk.deserialize(outdata);
+	chunk.deserialize(decompressed);
 
 	std::cout << "PacketChunkData unpacked in " << timer.stop() << "ms" << std::endl;
 }
@@ -127,7 +71,25 @@ bool PacketChunkData::dispatchClient(Client *client, sf::Packet *packet)
 	pake.rawPacket = *packet;
 	pake.unpack();
 
-	std::cout << pake.index.x << pake.index.y << std::endl;
+	//std::cout << pake.index.x << pake.index.y << std::endl;
+
+	if (!client)
+	{
+		std::cout << "[ERROR] Client is nullptr" << std::endl;
+		return false;
+	}
+
+	if (!client->getGame())
+	{
+		std::cout << "[ERROR] Game is nullptr" << std::endl;
+		return false;
+	}
+		
+	if (!WE::Engine::engine)
+	{
+		std::cout << "[ERROR] ENGINE is nullptr" << std::endl;
+		return false;
+	}
 
 	auto chunk = client->getGame()->getWorld().getChunk(pake.index);
 

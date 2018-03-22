@@ -160,6 +160,7 @@
     <ClInclude Include="Network\Server\TCPServerConnection.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Utils\ByteBuffer.h" />
     <ClInclude Include="World\Chunk\Chunk.h" />
     <ClInclude Include="World\Chunk\ChunkData.h" />
     <ClInclude Include="World\Chunk\ChunkMesh.h" />

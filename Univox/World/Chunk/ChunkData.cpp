@@ -9,69 +9,19 @@ ChunkData::~ChunkData()
 {
 }
 
-//void *ChunkData::serialize() const
-//{
-//	//std::stringstream buffer;
-//
-//	//for (int i = 0; i < Consts::CHUNK_SIZE; i++)
-//	//{
-//	//	for (int j = 0; j < Consts::CHUNK_HEIGHT; j++)
-//	//	{
-//	//		for (int k = 0; k < Consts::CHUNK_SIZE; k++)
-//	//		{
-//	//			buffer << blocks[Chunk::translateIndex(i, j, k)] << " ";
-//	//		}
-//	//	}
-//	//}
-//
-//	////std::cout << buffer.str() << std::endl;
-//
-//	//return buffer.str();
-//	return (void*)blocks.data();
-//}
-
-std::string ChunkData::serialize() const
+void ChunkData::serialize(ByteBuffer &outData) const
 {
-	std::stringstream buffer;
-
-	for (int i = 0; i < Consts::CHUNK_VOLUME; i++)
-	{
-		buffer << blocks[i] << " ";
-	}
-
-	//std::cout << buffer.str() << std::endl;
-
-	return buffer.str();
+	outData.resize(blocks.size() * sizeof(decltype(blocks)::value_type));
+	outData.toBytes(&blocks[0]);
 }
 
-bool ChunkData::deserialize(std::string & data)
+bool ChunkData::deserialize(ByteBuffer &inData)
 {
-	std::stringstream buffer(data);
-	bool block = false;
-	int index = 0;
-
-	while (buffer >> block)
+	if (inData.getSizeInBytes() == blocks.size() * sizeof(decltype(blocks)::value_type))
 	{
-		blocks[index] = block;
-		index++;
+		inData.fromBytes(&blocks[0]);
+		return true;
 	}
-
-	return true;
+	
+	return false;
 }
-
-//bool ChunkData::deserialize(void *data)
-//{
-//	/*std::stringstream buffer(data);
-//	bool block = false;
-//	int index = 0;
-//
-//	while (buffer >> block)
-//	{
-//		blocks[index] = block;
-//		index++;
-//	}
-//
-//	return true;*/
-//	std::memcpy(blocks.data(), data, sizeof(bool) * blocks.size());
-//	return true;
-//}

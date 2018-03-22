@@ -8,10 +8,8 @@ public:
 	ChunkData();
 	~ChunkData();
 
-	//void *serialize() const;
-	//bool deserialize(void *data);
-	std::string serialize() const;
-	bool deserialize(std::string &data);
+	void serialize(ByteBuffer &outData) const;
+	bool deserialize(ByteBuffer &inData);
 
 	std::array<bool, Consts::CHUNK_VOLUME> blocks;
 };

@@ -29,7 +29,6 @@ void ChunkMeshBuilder::build()
 				{
 					if (!isBlockCovered(i, j, k))
 					{
-						//WE::PrimitiveBuilder::createCube(p_chunk->getVertices(), p_chunk->getIndices(), { float(i), float(j), float(k) }, { float(i) + 1.f, float(j) + 1.f, float(k) + 1.f });
 						auto adjBlocks = getAdjacentBlocks(Vec3i(i, j, k));
 
 						if(adjBlocks.left == false)
