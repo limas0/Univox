@@ -14,6 +14,8 @@ struct AdjacentBlocks
 	bool back = false;
 };
 
+using BlockFaces = AdjacentBlocks;
+
 class ChunkMeshBuilder
 {
 public:
@@ -24,6 +26,8 @@ public:
 
 	inline bool isBlockCovered(int x, int y, int z) const;
 	inline AdjacentBlocks getAdjacentBlocks(Vec3i &pos) const;
+
+	inline void addBlock(int x, int y, int z, BlockFaces &faces);
 
 private:
 	Chunk *p_chunk = nullptr;
