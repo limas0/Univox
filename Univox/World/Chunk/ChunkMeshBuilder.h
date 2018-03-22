@@ -25,6 +25,7 @@ public:
 	void build();
 
 	inline bool isBlockCovered(int x, int y, int z) const;
+	inline bool isBlockCovered(const AdjacentBlocks &adj) const;
 	inline AdjacentBlocks getAdjacentBlocks(Vec3i &pos) const;
 
 	inline void addBlock(int x, int y, int z, BlockFaces &faces);
@@ -32,4 +33,5 @@ public:
 private:
 	Chunk *p_chunk = nullptr;
 	ChunkMesh *p_mesh = nullptr;
+	size_t verticesAdded = 0;
 };
