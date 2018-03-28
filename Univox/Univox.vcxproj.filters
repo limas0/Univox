@@ -102,6 +102,9 @@
     <ClCompile Include="Network\Client\Client.cpp">
       <Filter>Source Files\Network\Client</Filter>
     </ClCompile>
+    <ClCompile Include="World\WorldScene.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Utils\ByteBuffer.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="World\WorldScene.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

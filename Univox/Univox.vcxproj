@@ -143,6 +143,7 @@
     <ClCompile Include="World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="World\WorldRenderer.cpp" />
+    <ClCompile Include="World\WorldScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="World\World.h" />
     <ClInclude Include="World\WorldConstants.h" />
     <ClInclude Include="World\WorldRenderer.h" />
+    <ClInclude Include="World\WorldScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -97,12 +97,12 @@ bool PacketChunkData::dispatchClient(Client *client, sf::Packet *packet)
 
 	ChunkMesh *chunkMesh = new ChunkMesh();
 	ChunkMeshBuilder(chunk, chunkMesh).build();
-	chunkMesh->create();
+	chunkMesh->create(pake.index);
 
 	chunkMesh->setMaterial("Default");
 	chunkMesh->setTranslation({ float(pake.index.x * Consts::CHUNK_SIZE), 0.f, float(pake.index.y * Consts::CHUNK_SIZE) });
 
-	client->getGame()->getWorldRenderer().setChunkMesh(pake.index, chunkMesh);
+	client->getGame()->getWorldRenderer().setChunkMesh(chunkMesh);
 
 	return true;
 }

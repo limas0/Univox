@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "World\Chunk\ChunkMeshBuilder.h"
 #include "World\Chunk\ChunkMesh.h"
+#include "World\WorldScene.h"
 
 Game *Game::game = nullptr;
 
@@ -20,8 +21,7 @@ void Game::create()
 
 	auto &sceneHandler = renderer.getEngine().getSceneHandler();
 
-	worldRenderer.create(sceneHandler.addScene("World"));
-	sceneHandler.setActiveScene(worldRenderer.getScene());
+	worldRenderer.create(reinterpret_cast<WorldScene*>(sceneHandler.addScene("World", new WorldScene())));
 
 	player.create();
 	worldRenderer.getScene()->setActiveCamera(player.getCamera());
@@ -38,12 +38,12 @@ void Game::create()
 
 		ChunkMesh *chunkMesh = new ChunkMesh();
 		ChunkMeshBuilder(chunk, chunkMesh).build();
-		chunkMesh->create();
+		chunkMesh->create(pos);
 
 		chunkMesh->setMaterial("Default");
 		chunkMesh->setTranslation({ float(pos.x * Consts::CHUNK_SIZE), 0.f, float(pos.y * Consts::CHUNK_SIZE) });
 
-		worldRenderer.setChunkMesh(pos, chunkMesh);
+		worldRenderer.setChunkMesh(chunkMesh);
 	}
 }
 
@@ -56,16 +56,10 @@ void Game::destroy()
 	window.destroy();
 }
 
-void Game::run()
+void Game::loop()
 {
 	while (window.isOpen())
 	{
-		while (window.peekMessage(msg))
-		{
-			if (msg.is(WM_QUIT))
-				window.close();
-		}
-
 		renderer.clear();
 		renderer.update();
 		player.update();
@@ -86,6 +80,24 @@ void Game::run()
 
 		renderer.render();
 	}
+}
+
+void Game::run()
+{
+	std::thread peekMessageThread(&Game::loop, this);
+
+	WE::Message msg;
+
+	while (window.isOpen())
+	{
+		while (window.peekMessage(msg))
+		{
+			if (msg.is(WM_QUIT))
+				window.close();
+		}
+	}
+
+	peekMessageThread.join();
 }
 
 WE::Window &Game::getWindow()

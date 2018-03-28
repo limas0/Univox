@@ -3,33 +3,31 @@
 #include "Chunk\ChunkMesh.h"
 
 class World;
+class WorldScene;
 
 class WorldRenderer
 {
 public:
-	using MeshMap = std::unordered_map<Vec2i, ChunkMesh*>;
-
 	WorldRenderer();
 	~WorldRenderer();
 
-	void create(Scene *scene);
+	void create(WorldScene *scene);
 	void destroy();
 
-	void setChunkMesh(Vec2i &index, ChunkMesh *mesh);
+	void setChunkMesh(ChunkMesh *mesh);
 	inline ChunkMesh *getChunkMesh(Vec2i &index);
 
-	std::tuple<bool, WorldRenderer::MeshMap::const_iterator> getChunkMeshIter(Vec2i & index);
+	std::tuple<bool, MeshMap::const_iterator> getChunkMeshIter(Vec2i & index);
 
 	void setWorld(World *world);
-	inline Scene *getScene() const;
+	inline WorldScene *getScene() const;
 
 private:
-	Scene *p_scene = nullptr;
+	WorldScene *p_scene = nullptr;
 	World *p_world = nullptr;
-	MeshMap meshes;
 };
 
-inline Scene *WorldRenderer::getScene() const
+inline WorldScene *WorldRenderer::getScene() const
 {
 	return p_scene;
 }

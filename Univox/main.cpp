@@ -21,10 +21,11 @@ int main()
 	client.run();
 
 	game.run();
-	game.destroy();
 
 	client.destroy();
 	server.destroy();
+
+	game.destroy();
 
 	//constexpr int size = Consts::CHUNK_VOLUME;
 

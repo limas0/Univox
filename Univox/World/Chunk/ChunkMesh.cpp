@@ -8,8 +8,9 @@ ChunkMesh::~ChunkMesh()
 {
 }
 
-void ChunkMesh::create()
+void ChunkMesh::create(Vec2i index)
 {
+	m_index = index;
 	boundingBox.create({ 0.f, 0.f, 0.f }, { float(Consts::CHUNK_SIZE), float(Consts::CHUNK_HEIGHT), float(Consts::CHUNK_SIZE) });
 	Mesh::create();
 }
@@ -17,7 +18,7 @@ void ChunkMesh::create()
 void ChunkMesh::destroy()
 {
 	Mesh::destroy();
-	std::cout << "Destroyed chunk mesh" << std::endl;
+	//std::cout << "Destroyed chunk mesh" << std::endl;
 }
 
 void ChunkMesh::update()

@@ -15,6 +15,7 @@ public:
 	void create();
 	void destroy();
 
+	void loop();
 	void run();
 
 	WE::Window &getWindow();//elpregnanto
@@ -31,7 +32,6 @@ private:
 	World world;
 
 	WE::Window window;
-	WE::Message msg;
 	WE::RenderStatistics renderStats;
 };
 
