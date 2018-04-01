@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{eecb4957-eba7-420f-ab50-64957c0bcdb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mod">
+      <UniqueIdentifier>{9b4a8c52-2f57-4cbf-b62c-14f492cf727a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mod">
+      <UniqueIdentifier>{ef72215d-780b-4f93-bc9b-f4bd1ca061e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="World\WorldScene.cpp">
       <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Mod\Mod.cpp">
+      <Filter>Source Files\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Mod\ModLoader.cpp">
+      <Filter>Source Files\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Mod\ModHandler.cpp">
+      <Filter>Source Files\Mod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +193,18 @@
     </ClInclude>
     <ClInclude Include="World\WorldScene.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Mod\Mod.h">
+      <Filter>Header Files\Mod</Filter>
+    </ClInclude>
+    <ClInclude Include="Mod\ModLoader.h">
+      <Filter>Header Files\Mod</Filter>
+    </ClInclude>
+    <ClInclude Include="Directories.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mod\ModHandler.h">
+      <Filter>Header Files\Mod</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

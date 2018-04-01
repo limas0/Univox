@@ -45,10 +45,13 @@ void Game::create()
 
 		worldRenderer.setChunkMesh(chunkMesh);
 	}
+
+	modLoader.load(&modHandler);
 }
 
 void Game::destroy()
 {
+	modHandler.destroy();
 	world.destroy();
 	player.destroy();
 	worldRenderer.destroy();

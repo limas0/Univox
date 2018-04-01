@@ -90,7 +90,7 @@ void Client::handlePacket(sf::Packet *packet)
 {
 	size_t hashCode;
 	*packet >> hashCode;
-	std::cout << "Received packet[" << hashCode << "]" << std::endl;
+	//std::cout << "Received packet[" << hashCode << "]" << std::endl;
 
 	dispatcher.dispatchPacket(hashCode, packet);
 

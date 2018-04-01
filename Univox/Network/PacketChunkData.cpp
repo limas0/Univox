@@ -31,7 +31,7 @@ void PacketChunkData::pack()
 	rawPacket << sf::Uint32(compressed.getSizeInBytes());
 	rawPacket.append(compressed.getBytes(), compressed.getSizeInBytes());
 
-	std::cout << "PacketChunkData packed in " << timer.stop() << "ms" << std::endl;
+	//std::cout << "PacketChunkData packed in " << timer.stop() << "ms" << std::endl;
 }
 
 void PacketChunkData::unpack()
@@ -51,7 +51,7 @@ void PacketChunkData::unpack()
 
 	chunk.deserialize(decompressed);
 
-	std::cout << "PacketChunkData unpacked in " << timer.stop() << "ms" << std::endl;
+	//std::cout << "PacketChunkData unpacked in " << timer.stop() << "ms" << std::endl;
 }
 
 bool PacketChunkData::dispatchServer(Server *server, sf::Packet *packet)

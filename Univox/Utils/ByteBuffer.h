@@ -86,14 +86,14 @@ inline void ByteBuffer::compress(ByteBuffer &dst)
 		std::cout << "deflate init error" << std::endl;
 
 	s.next_in = (Bytef*)getBytes();
-	s.avail_in = getSizeInBytes();
+	s.avail_in = uInt(getSizeInBytes());
 
 	int ret;
 
 	do
 	{
 		s.next_out = reinterpret_cast<Bytef*>(dst.getBytes());
-		s.avail_out = dst.getSizeInBytes();
+		s.avail_out = uInt(dst.getSizeInBytes());
 
 		ret = deflate(&s, Z_FINISH);
 
@@ -116,14 +116,14 @@ inline void ByteBuffer::decompress(ByteBuffer &dst)
 		std::cout << "inflate init error" << std::endl;
 
 	s.next_in = (Bytef*)getBytes();
-	s.avail_in = getSizeInBytes();
+	s.avail_in = uInt(getSizeInBytes());
 
 	int ret;
 
 	do
 	{
 		s.next_out = reinterpret_cast<Bytef*>(dst.getBytes());
-		s.avail_out = dst.getSizeInBytes();
+		s.avail_out = uInt(dst.getSizeInBytes());
 
 		ret = inflate(&s, 0);
 

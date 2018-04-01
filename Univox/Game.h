@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "World\World.h"
 #include "World\WorldRenderer.h"
+#include "Mod\ModLoader.h"
+#include "Mod\ModHandler.h"
 
 class Game
 {
@@ -30,6 +32,9 @@ private:
 
 	Player player;
 	World world;
+
+	ModLoader modLoader;
+	ModHandler modHandler;
 
 	WE::Window window;
 	WE::RenderStatistics renderStats;

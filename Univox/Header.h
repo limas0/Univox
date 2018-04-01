@@ -18,11 +18,14 @@
 #include "Math\Math.h"
 #include "World\WorldConstants.h"
 #include "Utils\ByteBuffer.h"
+#include "Directories.h"
 
 #define GAME Game::game
 
 using WE::Mesh;
 using WE::Scene;
+using WE::FileHandler;
+using WE::FilePath;
 
 class ChunkMesh;
 using MeshMap = std::unordered_map<Vec2i, ChunkMesh*>;

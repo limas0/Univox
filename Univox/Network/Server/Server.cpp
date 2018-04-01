@@ -93,7 +93,7 @@ void Server::loop()
 			for (auto it = tcpClients.begin(); it != tcpClients.end(); ++it)
 				(*it)->send(test.rawPacket);
 
-			std::cout << "Sent packet[size: " << test.rawPacket.getDataSize() << "]" << std::endl;
+			//std::cout << "Sent packet[size: " << test.rawPacket.getDataSize() << "]" << std::endl;
 
 			el += 1;
 			el = el % (Consts::CHUNK_HEIGHT - 1);
@@ -109,7 +109,7 @@ void Server::newConnection()
 	sf::TcpSocket *newClient = new sf::TcpSocket();
 	if (tcpListener.accept(*newClient) == sf::Socket::Done)
 	{
-		std::cout << "New connection [" << newClient->getRemoteAddress() << "]" << std::endl;
+		//std::cout << "New connection [" << newClient->getRemoteAddress() << "]" << std::endl;
 		addClient(newClient);
 	}
 	else
@@ -144,7 +144,7 @@ void Server::handlePacket(sf::Packet *packet)
 {
 	size_t hashCode;
 	*packet >> hashCode;
-	std::cout << "Received packet[" << hashCode << "]" << std::endl;
+	//std::cout << "Received packet[" << hashCode << "]" << std::endl;
 	
 	dispatcher.dispatchPacket(hashCode, packet);
 

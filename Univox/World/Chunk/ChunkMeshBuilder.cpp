@@ -42,7 +42,7 @@ void ChunkMeshBuilder::build()
 
 	p_mesh->getVertices().resize(verticesAdded);
 
-	std::cout << "Chunk rebuilt in " << timer.stop() << "ms" << std::endl;
+	//std::cout << "Chunk rebuilt in " << timer.stop() << "ms" << std::endl;
 }
 
 inline bool ChunkMeshBuilder::isBlockCovered(int x, int y, int z) const

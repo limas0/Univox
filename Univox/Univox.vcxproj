@@ -72,10 +72,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(SolutionDir)includes\zlib;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs\$(Configuration);$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+    <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(SolutionDir)includes\zlib;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,6 +134,9 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mod\Mod.cpp" />
+    <ClCompile Include="Mod\ModHandler.cpp" />
+    <ClCompile Include="Mod\ModLoader.cpp" />
     <ClCompile Include="Network\Client\Client.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="Network\PacketChunkData.cpp" />
@@ -146,12 +153,16 @@
     <ClCompile Include="World\WorldScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Directories.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="IO\Serializable.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vec2.h" />
     <ClInclude Include="Math\Vec3.h" />
+    <ClInclude Include="Mod\Mod.h" />
+    <ClInclude Include="Mod\ModHandler.h" />
+    <ClInclude Include="Mod\ModLoader.h" />
     <ClInclude Include="Network\Client\Client.h" />
     <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="Network\PacketChunkData.h" />
