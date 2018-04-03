@@ -10,11 +10,14 @@ Mod::~Mod()
 	FreeLibrary(handle);
 }
 
-void Mod::load(std::string name)
+void Mod::load(FilePath path)
 {
-	handle = LoadLibrary(name.c_str());
+	handle = LoadLibrary(path.string().c_str());
 	if (!handle)
 	{
 		std::cout << "Cannot load mod '" << m_name << "' error: " << GetLastError() << std::endl;
 	}
+
+	onLoad = getFunction<void()>("onLoad");
+	onInit = getFunction<void()>("onInit");
 }

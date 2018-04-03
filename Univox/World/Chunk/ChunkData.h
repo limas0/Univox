@@ -2,6 +2,8 @@
 #include "../../Header.h"
 #include "../../IO/Serializable.h"
 
+class IBlock;
+
 class ChunkData : public Serializable
 {
 public:
@@ -11,5 +13,7 @@ public:
 	void serialize(ByteBuffer &outData) const;
 	bool deserialize(ByteBuffer &inData);
 
-	std::array<bool, Consts::CHUNK_VOLUME> blocks;
+	void cloneTo(ChunkData &dst);
+
+	std::array<std::unique_ptr<IBlock>, Consts::CHUNK_VOLUME> blocks;
 };

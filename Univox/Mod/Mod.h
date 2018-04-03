@@ -7,7 +7,10 @@ public:
 	Mod(std::string name);
 	~Mod();
 
-	void load(std::string name);
+	void load(FilePath path);
+
+	std::function<void()> onLoad;
+	std::function<void()> onInit;
 
 private:
 	template<typename T>
@@ -20,6 +23,11 @@ private:
 template<typename T>
 inline std::function<T> Mod::getFunction(LPCSTR name) const
 {
-	return std::function<T>(reinterpret_cast<T*>(GetProcAddress(handle, name)));
+	auto procAddress = GetProcAddress(handle, name);
+	if (!procAddress)
+	{
+		std::cout << "Cannot get function '" << name << "' error: " << GetLastError() << std::endl;
+	}
+	return std::function<T>(reinterpret_cast<T*>(procAddress));
 
 }

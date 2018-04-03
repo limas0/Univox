@@ -24,3 +24,19 @@ void ModHandler::registerMod(Mod *mod)
 {
 	mods.push_back(mod);
 }
+
+void ModHandler::loadAll()
+{
+	for (auto mod : mods)
+	{
+		mod->onLoad();
+	}
+}
+
+void ModHandler::initAll()
+{
+	for (auto mod : mods)
+	{
+		mod->onInit();
+	}
+}

@@ -47,6 +47,9 @@ void Game::create()
 	}
 
 	modLoader.load(&modHandler);
+
+	modHandler.loadAll();
+	modHandler.initAll();
 }
 
 void Game::destroy()

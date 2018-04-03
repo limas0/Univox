@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include "..\..\Block\IBlock.h"
 
 Chunk::Chunk()
 {
@@ -26,9 +27,14 @@ void Chunk::create(Vec2i &index)
 			for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 			{
 				if ((i / 4 % 2 == 0) && (j / 2 % 2 == 0) && (k / 1 % 2 == 0))
-					m_data.blocks[translateIndex(i, j, k)] = true;
+				{
+					//m_data.blocks[translateIndex(i, j, k)] = true;
+				}
 				else
-					m_data.blocks[translateIndex(i, j, k)] = false;
+				{
+					if (m_data.blocks[translateIndex(i, j, k)])
+						m_data.blocks[translateIndex(i, j, k)].reset();
+				}
 			}
 		}
 	}

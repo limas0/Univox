@@ -11,6 +11,9 @@ public:
 
 	void registerMod(Mod *mod);
 
+	void loadAll();
+	void initAll();
+
 private:
 	std::list<Mod*> mods;
 };

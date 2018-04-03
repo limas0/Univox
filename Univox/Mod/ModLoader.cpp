@@ -21,7 +21,7 @@ void ModLoader::load(ModHandler *p_handler)
 			std::cout << '\t' << mod.modName << std::endl;
 
 			Mod *newMod = new Mod(mod.modName);
-			newMod->load(mod.path.string() + "mod.dll");
+			newMod->load(mod.path / "mod.dll");
 
 			p_handler->registerMod(newMod);
 		}

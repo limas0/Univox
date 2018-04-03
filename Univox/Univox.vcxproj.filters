@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Mod">
       <UniqueIdentifier>{ef72215d-780b-4f93-bc9b-f4bd1ca061e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Block">
+      <UniqueIdentifier>{56cc219f-bce1-4779-9a54-37cc415c2b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{fec57981-5719-416a-9612-7ca608dd8d51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -119,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Mod\ModHandler.cpp">
       <Filter>Source Files\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Metadata.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +214,18 @@
     </ClInclude>
     <ClInclude Include="Mod\ModHandler.h">
       <Filter>Header Files\Mod</Filter>
+    </ClInclude>
+    <ClInclude Include="Block\Block.h">
+      <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Block\BlockProperties.h">
+      <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Block\IBlock.h">
+      <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Metadata.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

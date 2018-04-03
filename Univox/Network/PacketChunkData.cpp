@@ -20,7 +20,7 @@ void PacketChunkData::pack()
 
 	Packet::pack<PacketChunkData>();
 	
-	rawPacket << index.x << index.y;
+	//rawPacket << index.x << index.y;
 
 	ByteBuffer data;
 	chunk.serialize(data);
@@ -28,10 +28,21 @@ void PacketChunkData::pack()
 	ByteBuffer compressed;
 	data.compress(compressed);
 
+	rawPacket << sf::Uint32(data.getSizeInBytes());
 	rawPacket << sf::Uint32(compressed.getSizeInBytes());
 	rawPacket.append(compressed.getBytes(), compressed.getSizeInBytes());
 
-	//std::cout << "PacketChunkData packed in " << timer.stop() << "ms" << std::endl;
+	std::cout << "PacketChunkData packed in " << timer.stop() << "ms" << std::endl;
+}
+
+sf::Packet &operator>>(sf::Packet &packet, ByteBuffer &buffer)
+{
+	sf::Uint32 size;
+	packet >> size;
+	buffer.resize(size);
+	std::memcpy(&buffer.buffer[0], &packet.m_data[packet.m_readPos], size);
+	packet.m_readPos += size;
+	return packet;
 }
 
 void PacketChunkData::unpack()
@@ -39,19 +50,23 @@ void PacketChunkData::unpack()
 	WE::Timer timer;
 	timer.start();
 
-	rawPacket >> index.x >> index.y;
-	std::string data;//DO NOT COUT | NO NULL TERMINATOR
-	rawPacket >> data;
+	//rawPacket >> index.x >> index.y;
+	//std::string data;//DO NOT COUT | NO NULL TERMINATOR
+	//rawPacket >> data;
 
 	ByteBuffer buffer;
-	buffer.fromString(data);
+	//buffer.fromString(data);
+
+	sf::Uint32 decompressedSize = 0;
+	rawPacket >> decompressedSize;
+	rawPacket >> buffer;
 	
-	ByteBuffer decompressed(Consts::CHUNK_VOLUME);
+	ByteBuffer decompressed(decompressedSize);
 	buffer.decompress(decompressed);
 
 	chunk.deserialize(decompressed);
 
-	//std::cout << "PacketChunkData unpacked in " << timer.stop() << "ms" << std::endl;
+	std::cout << "PacketChunkData unpacked in " << timer.stop() << "ms" << std::endl;
 }
 
 bool PacketChunkData::dispatchServer(Server *server, sf::Packet *packet)

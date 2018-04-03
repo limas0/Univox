@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <zlib.h>
+#include <iostream>
 
 class ByteBuffer
 {
@@ -10,7 +11,7 @@ public:
 	~ByteBuffer();
 
 	inline void resize(const size_t size);
-	inline size_t getSizeInBytes();
+	inline size_t getSizeInBytes() const;
 
 	//dst could be resized in this function
 	inline void compress(ByteBuffer &dst);
@@ -22,7 +23,7 @@ public:
 	inline void fromString(std::string &src);
 
 	//do not delete manually
-	inline char *getBytes();
+	inline unsigned char *getBytes();
 
 	//count is the src container's element count
 	template<typename T>
@@ -31,24 +32,39 @@ public:
 	//dst needs to have at least buffer.size() bytes allocated 
 	inline void fromBytes(void *dst);
 
-	template<typename S = std::vector<char>, typename T>
+	template<typename S = std::vector<unsigned char>, typename T>
 	static inline S *toBytes(const T *src, const size_t count)
 	{
 		S *mid = new S();
-		if constexpr(std::is_same_v<S, std::vector<char>>)
+		if constexpr(std::is_same_v<S, std::vector<unsigned char>>)
 			mid->resize(count * sizeof(T));
 		std::memcpy(&(*mid)[0], src, count * sizeof(T));
 		return mid;
 	}
 
-	static inline void fromBytes(const char *src, const size_t count, void *dst)
+	static inline void fromBytes(const unsigned char *src, const size_t count, void *dst)
 	{
 		std::memcpy(dst, src, count);
 	}
 
-	std::vector<char> buffer;
+	void append(const void *data, size_t bytes);
+
+	ByteBuffer &operator<<(const int &val);
+	ByteBuffer &operator>>(int &val);
+
+	ByteBuffer &operator<<(const size_t &val);
+	ByteBuffer &operator>>(size_t &val);
+
+	ByteBuffer &operator<<(const std::string &val);
+	ByteBuffer &operator>>(std::string &val);
+
+	ByteBuffer &operator<<(const ByteBuffer &val);
+	ByteBuffer &operator>>(ByteBuffer &val);
+
+	std::vector<unsigned char> buffer;
 private:
 	size_t sizeInBytes = 0;
+	size_t readPos = 0;
 };
 
 inline ByteBuffer::ByteBuffer()
@@ -70,7 +86,7 @@ inline void ByteBuffer::resize(const size_t size)
 	buffer.resize(size);
 }
 
-inline size_t ByteBuffer::getSizeInBytes()
+inline size_t ByteBuffer::getSizeInBytes() const
 {
 	return buffer.size();
 }
@@ -139,7 +155,7 @@ inline void ByteBuffer::decompress(ByteBuffer &dst)
 
 inline void ByteBuffer::toString(std::string &dst)
 {
-	dst.append(buffer.data(), buffer.size());
+	dst.append((char*)buffer.data(), buffer.size());
 	dst.append('\0');
 }
 
@@ -149,7 +165,7 @@ inline void ByteBuffer::fromString(std::string &src)
 	std::memcpy(&buffer[0], &src.data()[0], src.size());
 }
 
-inline char *ByteBuffer::getBytes()
+inline unsigned char *ByteBuffer::getBytes()
 {
 	return buffer.data();
 }
@@ -157,6 +173,75 @@ inline char *ByteBuffer::getBytes()
 inline void ByteBuffer::fromBytes(void *dst)
 {
 	std::memcpy(dst, &buffer[0], buffer.size());
+}
+
+inline void ByteBuffer::append(const void *data, size_t bytes)
+{
+	size_t location = buffer.size();
+	buffer.resize(location + bytes);
+	std::memcpy(&buffer[location], data, bytes);
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const int &val)
+{
+	append(&val, sizeof(int));
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(int &val)
+{
+	std::memcpy(&val, &buffer[readPos], sizeof(int));
+	readPos += sizeof(int);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const size_t &val)
+{
+	append(&val, sizeof(size_t));
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(size_t &val)
+{
+	std::memcpy(&val, &buffer[readPos], sizeof(size_t));
+	readPos += sizeof(size_t);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const std::string &val)
+{
+	size_t size = val.size();
+	append(&size, sizeof(size_t));
+	append(val.data(), size);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(std::string &val)
+{
+	size_t size = 0;
+	operator>>(size);
+	val.clear();
+	val.resize(size);
+	val.assign((char*)&buffer[readPos], size);
+	readPos += size;
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const ByteBuffer &val)
+{
+	size_t size = val.getSizeInBytes();
+	append(&size, sizeof(size_t));
+	append(&val.buffer[0], size);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(ByteBuffer &val)
+{
+	size_t size = 0;
+	operator>>(size);
+	val.append(&buffer[readPos], size);
+	readPos += size;
+	return *this;
 }
 
 template<typename T>

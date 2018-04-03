@@ -31,14 +31,14 @@ inline bool Chunk::getBlock(int x, int y, int z) const
 	if(x < Consts::CHUNK_SIZE && x >= 0 &&
 		y < Consts::CHUNK_HEIGHT && y >= 0 &&
 		z < Consts::CHUNK_SIZE && z >= 0)
-		return m_data.blocks[translateIndex(x, y, z)];
+		return !!m_data.blocks[translateIndex(x, y, z)];
 
 	return false;
 }
 
 inline void Chunk::setChunkData(ChunkData &data)
 {
-	m_data = data;
+	data.cloneTo(m_data);
 }
 
 inline ChunkData &Chunk::getChunkData()

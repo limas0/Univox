@@ -83,7 +83,7 @@ void Server::loop()
 				{
 					for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 					{
-						test.chunk.blocks[Chunk::translateIndex(i, j, k)] = el == j;
+						//test.chunk.blocks[Chunk::translateIndex(i, j, k)] = el == j;
 					}
 				}
 			}

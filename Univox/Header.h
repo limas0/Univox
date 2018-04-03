@@ -20,6 +20,9 @@
 #include "Utils\ByteBuffer.h"
 #include "Directories.h"
 
+#include <winsock.h>
+#include <Windows.h>
+
 #define GAME Game::game
 
 using WE::Mesh;
