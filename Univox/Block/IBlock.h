@@ -1,7 +1,7 @@
 #pragma once
-#include "../../IO/Serializable.h"
+#include "..\IO\Serializable.h"
 
-class IBlock : public Serializable
+class UNIVOX_API IBlock : public Serializable
 {
 public:
 	virtual ~IBlock() = default;

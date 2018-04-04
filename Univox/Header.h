@@ -1,19 +1,27 @@
 #pragma once
-#include <Window.h>
-#include <Message.h>
-#include <Engine.h>
-#include <RenderStates.h>
-#include <Shader.h>
-#include <FirstPersonCamera.h>
-#include <Scene.h>
-#include <Cube.h>
-#include <Viewport.h>
-#include <RenderStatistics.h>
-#include <Mesh.h>
-#include <PrimitiveBuilder.h>
-#include <Sampler.h>
-#include <VertexBufferIndexed.h>
-#include <Timer.h>
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <filesystem>
+#include <functional>
+#include <string>
+#include <array>
+#include <math.h>
+#include <algorithm>
+#include <chrono>
+#include <fstream>
+#include <istream>
+#include <sstream>
+#include <map>
+#include <thread>
+#include <mutex>
+#include <iomanip>
+#include <memory>
+#include <type_traits>
+#include <atomic>
+#include <deque>
+#include <string_view>
+#include <cctype>
 
 #include "Math\Math.h"
 #include "World\WorldConstants.h"
@@ -25,19 +33,18 @@
 
 #define GAME Game::game
 
-using WE::Mesh;
-using WE::Scene;
-using WE::FileHandler;
-using WE::FilePath;
-
 class ChunkMesh;
 using MeshMap = std::unordered_map<Vec2i, ChunkMesh*>;
 
-//#ifdef UNIVOX_EXPORT_API
-//#define UNIVOX_API __declspec(dllexport)
-//#else
-//#define UNIVOX_API __declspec(dllimport)
-//#endif
+#ifndef NOT_UNIVOX_EXPORT_API
+	#ifdef UNIVOX_EXPORT_API
+		#define UNIVOX_API __declspec(dllexport)
+	#else
+		#define UNIVOX_API __declspec(dllimport)
+	#endif
+#else
+	#define UNIVOX_API
+#endif
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4251)

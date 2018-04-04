@@ -1,7 +1,8 @@
 #pragma once
-#include <FileHandler.h>
+#include "Header.h"
 
-using WE::FilePath;
+namespace filesystem = std::experimental::filesystem;
+typedef filesystem::path FilePath;
 
 namespace Dir
 {

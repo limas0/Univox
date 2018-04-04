@@ -1,8 +1,8 @@
 #pragma once
+#include "..\Header.h"
+#include <string>
 
-struct BlockProperties
+struct UNIVOX_API BlockProperties
 {
-	static int id;
+	static std::string id;
 };
-
-int BlockProperties::id = 1;

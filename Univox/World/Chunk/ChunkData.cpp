@@ -21,17 +21,9 @@ ChunkData::~ChunkData()
 
 void ChunkData::serialize(ByteBuffer &outData) const
 {
-	/*outData.resize(blocks.size() * sizeof(decltype(blocks)::value_type));
-	outData.toBytes(&blocks[0]);*/
-
-	int size = 0;
-
+	/*int size = 0;
 	size = std::accumulate(blocks.begin(), blocks.end(), size_t(0), [&](size_t &r, const std::unique_ptr<IBlock> &l) { return r + l->size(); });
-	
-	outData << size;
-
-	//outData.resize(outData.getSizeInBytes() + size);
-	//size_t writeLoc = 0;
+	outData << size;*/
 
 	for (int i = 0; i < blocks.size(); ++i)
 	{
@@ -83,15 +75,15 @@ void ChunkData::serialize(ByteBuffer &outData) const
 
 bool ChunkData::deserialize(ByteBuffer &inData)
 {
-	int size = 0;
+	/*int size = 0;
 	inData >> size;
-	std::cout << size << std::endl;
+	std::cout << size << std::endl;*/
 
-	for (int i = 0; i < 1; ++i)
+	/*for (int i = 0; i < 1; ++i)
 	{
 		Metadata met;
 		ByteBuffer buffer;
-		int cos = 0;
+		std::string cos;
 		inData >> buffer;
 		buffer >> cos;
 		met.deserialize(buffer);
@@ -99,15 +91,9 @@ bool ChunkData::deserialize(ByteBuffer &inData)
 		int temp = 0;
 		buffer >> temp;
 		std::cout << met.getProperty("into") << std::endl;
-	}
-
-	/*if (inData.getSizeInBytes() == blocks.size() * sizeof(decltype(blocks)::value_type))
-	{
-		inData.fromBytes(&blocks[0]);
-		return true;
 	}*/
 	
-	return false;
+	return true;
 }
 
 void ChunkData::cloneTo(ChunkData &dst)

@@ -42,7 +42,7 @@ inline void Block<T>::serialize(ByteBuffer &outData) const
 template<typename T>
 inline bool Block<T>::deserialize(ByteBuffer &inData)
 {
-	int id;
+	decltype(T::id) id;
 	inData >> id;
 	metadata.deserialize(inData);
 	return true;

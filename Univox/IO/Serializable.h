@@ -2,7 +2,7 @@
 #include <string>
 #include "..\Utils\ByteBuffer.h"
 
-class Serializable
+class UNIVOX_API Serializable
 {
 public:
 	Serializable() = default;

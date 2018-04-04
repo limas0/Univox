@@ -19,5 +19,10 @@ void Mod::load(FilePath path)
 	}
 
 	onLoad = getFunction<void()>("onLoad");
-	onInit = getFunction<void()>("onInit");
+	onInit = getFunction<void(InitWrapper*)>("onInit");
+}
+
+std::string Mod::getName()
+{
+	return m_name;
 }

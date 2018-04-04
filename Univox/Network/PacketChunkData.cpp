@@ -1,7 +1,6 @@
 #include "PacketChunkData.h"
 #include "../Game.h"
 #include "../World/Chunk/ChunkMeshBuilder.h"
-#include <zlib.h>
 #include "../Utils/ByteBuffer.h"
 
 PacketChunkData::PacketChunkData():
@@ -27,6 +26,9 @@ void PacketChunkData::pack()
 	
 	ByteBuffer compressed;
 	data.compress(compressed);
+
+	std::cout << "Uncompressed: " << data.getSizeInBytes() / 1000000.f << "MB" << std::endl;
+	std::cout << "Uncompressed: " << compressed.getSizeInBytes() / 1000000.f << "MB" << std::endl;
 
 	rawPacket << sf::Uint32(data.getSizeInBytes());
 	rawPacket << sf::Uint32(compressed.getSizeInBytes());

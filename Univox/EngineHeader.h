@@ -1,0 +1,20 @@
+#pragma once
+#include <Window.h>
+#include <Message.h>
+#include <Engine.h>
+#include <RenderStates.h>
+#include <Shader.h>
+#include <FirstPersonCamera.h>
+#include <Scene.h>
+#include <Cube.h>
+#include <Viewport.h>
+#include <RenderStatistics.h>
+#include <Mesh.h>
+#include <PrimitiveBuilder.h>
+#include <Sampler.h>
+#include <VertexBufferIndexed.h>
+#include <Timer.h>
+
+using WE::Mesh;
+using WE::Scene;
+using WE::FileHandler;

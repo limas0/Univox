@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="API|Win32">
+      <Configuration>API</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="API|x64">
+      <Configuration>API</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -38,6 +46,13 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='API|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -46,6 +61,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='API|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -62,22 +84,34 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='API|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='API|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(SolutionDir)includes\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs\$(Configuration);$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(SolutionDir)includes\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_$(Configuration);$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='API|x64'">
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)imgui;$(SolutionDir)..\WODXE11\WODXE11;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libs;$(SolutionDir)..\WODXE11\libs_Release;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
@@ -94,7 +128,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>UNIVOX_EXPORT_API;_SILENCE_PARALLEL_ALGORITHMS_EXPERIMENTAL_WARNING</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOT_UNIVOX_EXPORT_API;_SILENCE_PARALLEL_ALGORITHMS_EXPERIMENTAL_WARNING</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -102,6 +136,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='API|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -123,6 +170,23 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>NOT_UNIVOX_EXPORT_API;_SILENCE_PARALLEL_ALGORITHMS_EXPERIMENTAL_WARNING</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>WODXE11.lib;d3dx11d.lib;d3d11.lib;d3dcompiler.lib;dxgi.lib;dinput8.lib;dxguid.lib;sfml-main.lib;sfml-system.lib;sfml-network.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='API|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>UNIVOX_EXPORT_API;_SILENCE_PARALLEL_ALGORITHMS_EXPERIMENTAL_WARNING</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -132,6 +196,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Block\BlockProperties.cpp" />
+    <ClCompile Include="Factory\BlockFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mod\Mod.cpp" />
@@ -143,6 +209,7 @@
     <ClCompile Include="Network\Server\PacketDispatcher.cpp" />
     <ClCompile Include="Network\Server\Server.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Registries\BlockRegistry.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Utils\Metadata.cpp" />
     <ClCompile Include="World\Chunk\Chunk.cpp" />
@@ -152,12 +219,16 @@
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="World\WorldRenderer.cpp" />
     <ClCompile Include="World\WorldScene.cpp" />
+    <ClCompile Include="Wrapper\InitWrapper.cpp" />
+    <ClCompile Include="Wrapper\LoadWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block\Block.h" />
     <ClInclude Include="Block\BlockProperties.h" />
     <ClInclude Include="Block\IBlock.h" />
     <ClInclude Include="Directories.h" />
+    <ClInclude Include="EngineHeader.h" />
+    <ClInclude Include="Factory\BlockFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="IO\Serializable.h" />
@@ -175,6 +246,7 @@
     <ClInclude Include="Network\Server\ServerConstants.h" />
     <ClInclude Include="Network\Server\TCPServerConnection.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Registries\BlockRegistry.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Utils\ByteBuffer.h" />
     <ClInclude Include="Utils\Metadata.h" />
@@ -186,6 +258,8 @@
     <ClInclude Include="World\WorldConstants.h" />
     <ClInclude Include="World\WorldRenderer.h" />
     <ClInclude Include="World\WorldScene.h" />
+    <ClInclude Include="Wrapper\InitWrapper.h" />
+    <ClInclude Include="Wrapper\LoadWrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

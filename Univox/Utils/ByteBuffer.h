@@ -1,7 +1,6 @@
 #pragma once
-#include <vector>
-#include <zlib.h>
-#include <iostream>
+#include "..\Header.h"
+#include "..\zlib.h"
 
 class ByteBuffer
 {
@@ -47,19 +46,19 @@ public:
 		std::memcpy(dst, src, count);
 	}
 
-	void append(const void *data, size_t bytes);
+	inline void append(const void *data, size_t bytes);
 
-	ByteBuffer &operator<<(const int &val);
-	ByteBuffer &operator>>(int &val);
+	inline ByteBuffer &operator<<(const int &val);
+	inline ByteBuffer &operator>>(int &val);
 
-	ByteBuffer &operator<<(const size_t &val);
-	ByteBuffer &operator>>(size_t &val);
+	inline ByteBuffer &operator<<(const size_t &val);
+	inline ByteBuffer &operator>>(size_t &val);
 
-	ByteBuffer &operator<<(const std::string &val);
-	ByteBuffer &operator>>(std::string &val);
+	inline ByteBuffer &operator<<(const std::string &val);
+	inline ByteBuffer &operator>>(std::string &val);
 
-	ByteBuffer &operator<<(const ByteBuffer &val);
-	ByteBuffer &operator>>(ByteBuffer &val);
+	inline ByteBuffer &operator<<(const ByteBuffer &val);
+	inline ByteBuffer &operator>>(ByteBuffer &val);
 
 	std::vector<unsigned char> buffer;
 private:
@@ -177,9 +176,17 @@ inline void ByteBuffer::fromBytes(void *dst)
 
 inline void ByteBuffer::append(const void *data, size_t bytes)
 {
-	size_t location = buffer.size();
-	buffer.resize(location + bytes);
-	std::memcpy(&buffer[location], data, bytes);
+	//if (buffer.capacity() - buffer.size() >= bytes)//Trying to optimize
+	//{
+	//	//std::copy((unsigned char *)data, (unsigned char *)data + bytes, std::back_inserter(buffer));
+	//	buffer.insert(buffer.end(), (unsigned char *)data, (unsigned char *)data + bytes);
+	//}
+	//else
+	{
+		size_t location = buffer.size();
+		buffer.resize(location + bytes);
+		std::memcpy(&buffer[location], data, bytes);
+	}
 }
 
 inline ByteBuffer &ByteBuffer::operator<<(const int &val)

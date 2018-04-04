@@ -6,7 +6,7 @@
 #include "..\IO\Serializable.h"
 #include "ByteBuffer.h"
 
-class Metadata : public Serializable
+class UNIVOX_API Metadata : public Serializable
 {
 public:
 	Metadata();

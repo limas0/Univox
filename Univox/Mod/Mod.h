@@ -1,7 +1,9 @@
 #pragma once
-#include "../Header.h"
+#include "..\Header.h"
 
-class Mod
+class InitWrapper;
+
+class UNIVOX_API Mod
 {
 public:
 	Mod(std::string name);
@@ -10,7 +12,9 @@ public:
 	void load(FilePath path);
 
 	std::function<void()> onLoad;
-	std::function<void()> onInit;
+	std::function<void(InitWrapper*)> onInit;
+
+	std::string getName();
 
 private:
 	template<typename T>

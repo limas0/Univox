@@ -1,5 +1,6 @@
 #pragma once
-#include "../../Header.h"
+#include "..\..\Header.h"
+#include "..\..\EngineHeader.h"
 
 class ChunkMesh : public Mesh<WE::VertexBuffer<WE::SceneObject::Vertex>>
 {

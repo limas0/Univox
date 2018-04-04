@@ -1,14 +1,16 @@
-#include <iostream>
-
 #pragma once
-#define DLL_EXPORT extern "C" __declspec(dllexport)
+#include "Header.h"
+#include "DirtBlock.h"
 
 DLL_EXPORT void onLoad()
 {
 	std::cout << "test" << std::endl;
 }
 
-DLL_EXPORT void onInit()
+DLL_EXPORT void onInit(InitWrapper *wrapper)
 {
+	auto &blockRegistry = wrapper->getBlockRegistry();
+	blockRegistry.registerBlock<DirtBlockProperties>(new DirtBlock());
+
 	std::cout << "testInit" << std::endl;
 }

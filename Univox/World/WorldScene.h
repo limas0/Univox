@@ -1,5 +1,6 @@
 #pragma once
 #include "..\Header.h"
+#include "..\EngineHeader.h"
 
 template<typename T>
 class SafeDeque

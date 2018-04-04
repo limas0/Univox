@@ -5,6 +5,7 @@
 #include "World\WorldRenderer.h"
 #include "Mod\ModLoader.h"
 #include "Mod\ModHandler.h"
+#include "Registries\BlockRegistry.h"
 
 class Game
 {
@@ -26,12 +27,15 @@ public:
 	Player &getPlayer();
 	World &getWorld();
 	WorldRenderer &getWorldRenderer();
+	BlockRegistry &getBlockRegistry();
 private:
 	Renderer renderer;
 	WorldRenderer worldRenderer;
 
 	Player player;
 	World world;
+
+	BlockRegistry blockRegistry;
 
 	ModLoader modLoader;
 	ModHandler modHandler;

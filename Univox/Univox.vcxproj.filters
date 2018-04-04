@@ -67,6 +67,27 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{fec57981-5719-416a-9612-7ca608dd8d51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Registries">
+      <UniqueIdentifier>{81d71ea0-e27b-47b1-91e0-dca579baffb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Registries">
+      <UniqueIdentifier>{1d888264-7c1f-4e85-a991-62738100c3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Factory">
+      <UniqueIdentifier>{9fc1e05f-01f7-4572-9581-d969242198c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factory">
+      <UniqueIdentifier>{7a04d24f-d58e-4a0e-bd68-db7a7b2b1f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Wrapper">
+      <UniqueIdentifier>{96706ddf-5837-4b0d-9a4b-d1521f93dc4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Wrapper">
+      <UniqueIdentifier>{72bbf621-d136-4aa5-9caf-2a881ca5e468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block">
+      <UniqueIdentifier>{1344f815-6def-4193-9b3e-c06430963f38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +149,21 @@
     </ClCompile>
     <ClCompile Include="Utils\Metadata.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Registries\BlockRegistry.cpp">
+      <Filter>Source Files\Registries</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BlockFactory.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper\LoadWrapper.cpp">
+      <Filter>Source Files\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper\InitWrapper.cpp">
+      <Filter>Source Files\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Block\BlockProperties.cpp">
+      <Filter>Source Files\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +262,21 @@
     </ClInclude>
     <ClInclude Include="Utils\Metadata.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Registries\BlockRegistry.h">
+      <Filter>Header Files\Registries</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BlockFactory.h">
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper\LoadWrapper.h">
+      <Filter>Header Files\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper\InitWrapper.h">
+      <Filter>Header Files\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineHeader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

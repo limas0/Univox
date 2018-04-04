@@ -29,14 +29,18 @@ void ModHandler::loadAll()
 {
 	for (auto mod : mods)
 	{
+		currentlyUsing = mod;
 		mod->onLoad();
+		currentlyUsing = nullptr;
 	}
 }
 
-void ModHandler::initAll()
+void ModHandler::initAll(InitWrapper *wrapper)
 {
 	for (auto mod : mods)
 	{
-		mod->onInit();
+		currentlyUsing = mod;
+		mod->onInit(wrapper);
+		currentlyUsing = nullptr;
 	}
 }

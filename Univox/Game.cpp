@@ -2,6 +2,10 @@
 #include "World\Chunk\ChunkMeshBuilder.h"
 #include "World\Chunk\ChunkMesh.h"
 #include "World\WorldScene.h"
+#include "Wrapper\InitWrapper.h"
+
+#include "Block\Block.h"
+#include "Block\BlockProperties.h"
 
 Game *Game::game = nullptr;
 
@@ -46,15 +50,24 @@ void Game::create()
 		worldRenderer.setChunkMesh(chunkMesh);
 	}
 
+	blockRegistry.create(&modHandler);
+
 	modLoader.load(&modHandler);
 
 	modHandler.loadAll();
-	modHandler.initAll();
+
+	InitWrapper initWrapper;
+	initWrapper.create(this);
+
+	modHandler.initAll(&initWrapper);
+
+	initWrapper.destory();
 }
 
 void Game::destroy()
 {
 	modHandler.destroy();
+	blockRegistry.destroy();
 	world.destroy();
 	player.destroy();
 	worldRenderer.destroy();
@@ -129,4 +142,9 @@ World &Game::getWorld()
 WorldRenderer &Game::getWorldRenderer()
 {
 	return worldRenderer;
+}
+
+BlockRegistry &Game::getBlockRegistry()
+{
+	return blockRegistry;
 }
