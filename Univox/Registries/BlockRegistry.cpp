@@ -6,11 +6,11 @@ BlockRegistry::BlockRegistry()
 
 BlockRegistry::~BlockRegistry()
 {
-	for (auto [key, val] : registry)
+	for(auto iter = registry.begin(); iter != registry.end(); ++iter)
 	{
-		if (val)
-			delete val;
-		val = nullptr;
+		if (iter->second)
+			delete iter->second;
+		iter->second = nullptr;
 	}
 }
 

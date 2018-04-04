@@ -48,8 +48,17 @@ public:
 
 	inline void append(const void *data, size_t bytes);
 
-	inline ByteBuffer &operator<<(const int &val);
-	inline ByteBuffer &operator>>(int &val);
+	inline ByteBuffer &operator<<(const std::int8_t &val);
+	inline ByteBuffer &operator>>(std::int8_t &val);
+
+	inline ByteBuffer &operator<<(const std::uint8_t &val);
+	inline ByteBuffer &operator>>(std::uint8_t &val);
+
+	inline ByteBuffer &operator<<(const std::int16_t &val);
+	inline ByteBuffer &operator>>(std::int16_t &val);
+
+	inline ByteBuffer &operator<<(const std::int32_t &val);
+	inline ByteBuffer &operator>>(std::int32_t &val);
 
 	inline ByteBuffer &operator<<(const size_t &val);
 	inline ByteBuffer &operator>>(size_t &val);
@@ -189,16 +198,55 @@ inline void ByteBuffer::append(const void *data, size_t bytes)
 	}
 }
 
-inline ByteBuffer &ByteBuffer::operator<<(const int &val)
+inline ByteBuffer &ByteBuffer::operator<<(const std::int8_t &val)
 {
-	append(&val, sizeof(int));
+	append(&val, sizeof(std::int8_t));
 	return *this;
 }
 
-inline ByteBuffer &ByteBuffer::operator>>(int &val)
+inline ByteBuffer &ByteBuffer::operator>>(std::int8_t &val)
 {
-	std::memcpy(&val, &buffer[readPos], sizeof(int));
-	readPos += sizeof(int);
+	std::memcpy(&val, &buffer[readPos], sizeof(std::int8_t));
+	readPos += sizeof(std::int8_t);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const std::uint8_t &val)
+{
+	append(&val, sizeof(std::uint8_t));
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(std::uint8_t &val)
+{
+	std::memcpy(&val, &buffer[readPos], sizeof(std::uint8_t));
+	readPos += sizeof(std::uint8_t);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const std::int16_t &val)
+{
+	append(&val, sizeof(std::int16_t));
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(std::int16_t &val)
+{
+	std::memcpy(&val, &buffer[readPos], sizeof(std::int16_t));
+	readPos += sizeof(std::int16_t);
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator<<(const std::int32_t &val)
+{
+	append(&val, sizeof(std::int32_t));
+	return *this;
+}
+
+inline ByteBuffer &ByteBuffer::operator>>(std::int32_t &val)
+{
+	std::memcpy(&val, &buffer[readPos], sizeof(std::int32_t));
+	readPos += sizeof(std::int32_t);
 	return *this;
 }
 

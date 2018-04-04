@@ -6,6 +6,7 @@
 #include "..\IO\Serializable.h"
 #include "ByteBuffer.h"
 
+//Stores up to 255 properties
 class UNIVOX_API Metadata : public Serializable
 {
 public:
@@ -23,7 +24,6 @@ public:
 private:
 	std::map<std::string, std::string> data;
 };
-
 
 inline bool Metadata::setProperty(std::string key, std::string val)
 {

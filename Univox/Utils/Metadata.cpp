@@ -12,7 +12,7 @@ Metadata::~Metadata()
 
 void Metadata::serialize(ByteBuffer &dst) const
 {
-	dst << data.size();
+	dst << std::uint8_t(data.size());
 	for (auto iter = data.begin(); iter != data.end(); ++iter)
 	{
 		dst << iter->first << iter->second;
@@ -21,7 +21,7 @@ void Metadata::serialize(ByteBuffer &dst) const
 
 bool Metadata::deserialize(ByteBuffer &src)
 {
-	size_t size = 0;
+	std::uint8_t size = 0;
 	src >> size;
 
 	for (int i = 0; i < size; i++)

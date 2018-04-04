@@ -28,11 +28,10 @@ void ChunkData::serialize(ByteBuffer &outData) const
 	for (int i = 0; i < blocks.size(); ++i)
 	{
 		ByteBuffer buffer;
-		((Block<BlockProperties>*)blocks[i].get())->metadata.setProperty("into", "w dupe");
+		buffer.buffer.reserve(512);//temporary speedup
+		reinterpret_cast<Block<BlockProperties>*>(blocks[i].get())->metadata.setProperty("into", "w dupe");
 		blocks[i]->serialize(buffer);
 		outData << buffer;
-		//std::memcpy(&outData.buffer[writeLoc], buffer.getBytes(), buffer.getSizeInBytes());
-		//writeLoc += buffer.getSizeInBytes();
 	}
 
 	//std::cout << size << std::endl;
@@ -79,7 +78,7 @@ bool ChunkData::deserialize(ByteBuffer &inData)
 	inData >> size;
 	std::cout << size << std::endl;*/
 
-	/*for (int i = 0; i < 1; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		Metadata met;
 		ByteBuffer buffer;
@@ -91,7 +90,7 @@ bool ChunkData::deserialize(ByteBuffer &inData)
 		int temp = 0;
 		buffer >> temp;
 		std::cout << met.getProperty("into") << std::endl;
-	}*/
+	}
 	
 	return true;
 }
