@@ -4,6 +4,7 @@
 
 class Chunk;
 class ChunkMesh;
+class IBlock;
 
 struct AdjacentBlocks
 {
@@ -29,7 +30,7 @@ public:
 	inline bool isBlockCovered(const AdjacentBlocks &adj) const;
 	inline AdjacentBlocks getAdjacentBlocks(Vec3i &pos) const;
 
-	inline void addBlock(int x, int y, int z, BlockFaces &faces);
+	inline void addBlock(int x, int y, int z, BlockFaces &faces, IBlock *block);
 
 private:
 	Chunk *p_chunk = nullptr;

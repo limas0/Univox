@@ -18,8 +18,6 @@ public:
 	void setChunkMesh(ChunkMesh *mesh);
 	inline ChunkMesh *getChunkMesh(Vec2i &index);
 
-	std::tuple<bool, MeshMap::const_iterator> getChunkMeshIter(Vec2i & index);
-
 	void setWorld(World *world);
 	inline WorldScene *getScene() const;
 

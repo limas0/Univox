@@ -27,8 +27,8 @@ void PacketChunkData::pack()
 	ByteBuffer compressed;
 	data.compress(compressed);
 
-	std::cout << "Uncompressed: " << data.getSizeInBytes() / 1000000.f << "MB" << std::endl;
-	std::cout << "Uncompressed: " << compressed.getSizeInBytes() / 1000000.f << "MB" << std::endl;
+	std::cout << "Uncompressed: " << data.getSizeInBytes() / 1000000.f << " MB" << std::endl;
+	std::cout << "Compressed: " << compressed.getSizeInBytes() / 1000000.f << " MB" << std::endl;
 
 	rawPacket << sf::Uint32(data.getSizeInBytes());
 	rawPacket << sf::Uint32(compressed.getSizeInBytes());

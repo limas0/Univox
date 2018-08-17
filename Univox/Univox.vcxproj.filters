@@ -88,6 +88,12 @@
     <Filter Include="Source Files\Block">
       <UniqueIdentifier>{1344f815-6def-4193-9b3e-c06430963f38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Texture">
+      <UniqueIdentifier>{8f153a87-341f-4452-993e-728863fc7b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Texture">
+      <UniqueIdentifier>{ec23e847-bf2a-4574-b0f9-8119a13fa58e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -164,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="Block\BlockProperties.cpp">
       <Filter>Source Files\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\TextureAtlas.cpp">
+      <Filter>Source Files\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +285,18 @@
       <Filter>Header Files\Wrapper</Filter>
     </ClInclude>
     <ClInclude Include="EngineHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\TextureAtlas.h">
+      <Filter>Header Files\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Block\BlockModel.h">
+      <Filter>Header Files\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vec4.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="API.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

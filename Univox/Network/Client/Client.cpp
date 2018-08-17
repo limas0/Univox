@@ -65,7 +65,7 @@ void Client::loop()
 
 void Client::connect()
 {
-	tcpSocket.connect("94.251.205.88", Consts::SERVER_TCP_PORT);
+	tcpSocket.connect("localhost", Consts::SERVER_TCP_PORT);
 	udpSocket.bind(Consts::CLIENT_UDP_PORT);
 }
 

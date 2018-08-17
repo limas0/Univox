@@ -10,6 +10,9 @@
 
 #include "ServerConstants.h"
 #include "PacketDispatcher.h"
+#include "..\..\Mod\ModLoader.h"
+#include "..\..\Mod\ModHandler.h"
+#include "..\..\Registries\BlockRegistry.h"
 
 class Server
 {
@@ -43,4 +46,9 @@ private:
 	std::list<sf::TcpSocket*> tcpClients;
 
 	PacketDispatcher<Server> dispatcher;
+
+	BlockRegistry blockRegistry;
+
+	ModLoader modLoader;
+	ModHandler modHandler;
 };

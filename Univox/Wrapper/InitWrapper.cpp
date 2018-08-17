@@ -11,9 +11,9 @@ InitWrapper::~InitWrapper()
 
 }
 
-void InitWrapper::create(Game *instance)
+void InitWrapper::create()
 {
-	p_game = instance;
+	
 }
 
 void InitWrapper::destory()
@@ -23,5 +23,5 @@ void InitWrapper::destory()
 
 BlockRegistry &InitWrapper::getBlockRegistry()
 {
-	return p_game->getBlockRegistry();
+	return *p_blockRegistry;
 }

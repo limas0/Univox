@@ -1,6 +1,7 @@
 #include "ChunkMeshBuilder.h"
 #include "Chunk.h"
 #include "ChunkMesh.h"
+#include "..\..\Block\IBlock.h"
 
 ChunkMeshBuilder::ChunkMeshBuilder(Chunk *chunk, ChunkMesh *chunkMesh) :
 	p_chunk(chunk),
@@ -27,13 +28,13 @@ void ChunkMeshBuilder::build()
 		{
 			for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 			{
-				if (p_chunk->getBlock(i, j, k) == true)
+				if (auto block = p_chunk->getBlock(i, j, k); block)
 				{
 					auto adjBlocks = getAdjacentBlocks(Vec3i(i, j, k));
-
+					
 					if (!isBlockCovered(adjBlocks))
 					{
-						addBlock(i, j, k, adjBlocks);
+						addBlock(i, j, k, adjBlocks, block);
 					}
 				}
 			}
@@ -71,11 +72,12 @@ inline AdjacentBlocks ChunkMeshBuilder::getAdjacentBlocks(Vec3i &pos) const
 	return result;
 }
 
-inline void ChunkMeshBuilder::addBlock(int x, int y, int z, BlockFaces &faces)
+inline void ChunkMeshBuilder::addBlock(int x, int y, int z, BlockFaces &faces, IBlock *block)
 {
 	if (faces.left == false)
 	{
-		p_mesh->addQuad({ float(x), float(y), float(z) }, { 1.f, 1.f }, { -1.f, 0.f, 0.f });
+		auto tex = block->getBlockModel().tex;
+		p_mesh->addQuad({ float(x), float(y), float(z) }, { 1.f, 1.f }, { -1.f, 0.f, 0.f }, { tex.x, tex.y, tex.z, tex.w });
 		verticesAdded += 6;
 	}
 
@@ -91,20 +93,20 @@ inline void ChunkMeshBuilder::addBlock(int x, int y, int z, BlockFaces &faces)
 		p_mesh->addQuad({ float(x), float(y), float(z) }, { 1.f, 1.f }, { 0.f, -1.f, 0.f });
 		verticesAdded += 6;
 	}
-		
+
 	if (faces.top == false)
 	{
 		p_mesh->addQuad({ float(x), float(y) + 1.f, float(z) }, { 1.f, 1.f }, { 0.f, 1.f, 0.f });
 		verticesAdded += 6;
 	}
-		
+
 
 	if (faces.back == false)
 	{
 		p_mesh->addQuad({ float(x), float(y), float(z) }, { 1.f, 1.f }, { 0.f, 0.f, -1.f });
 		verticesAdded += 6;
 	}
-		
+
 	if (faces.front == false)
 	{
 		p_mesh->addQuad({ float(x), float(y), float(z) + 1.f }, { 1.f, 1.f }, { 0.f, 0.f, 1.f });

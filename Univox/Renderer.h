@@ -24,5 +24,7 @@ private:
 
 	WE::RenderStates *defaultStates = nullptr;
 	WE::RenderStates *wireframeStates = nullptr;
+
+	WE::Texture textureAtlas;
 };
 

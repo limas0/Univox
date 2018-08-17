@@ -15,7 +15,7 @@ public:
 	void create(Vec2i &index);
 	void destroy();
 
-	inline bool getBlock(int x, int y, int z) const;
+	inline IBlock *getBlock(int x, int y, int z) const;
 
 	inline void setChunkData(ChunkData &data);
 	inline ChunkData &getChunkData();
@@ -26,12 +26,12 @@ private:
 	ChunkData m_data;
 };
 
-inline bool Chunk::getBlock(int x, int y, int z) const
+inline IBlock *Chunk::getBlock(int x, int y, int z) const
 {
 	if(x < Consts::CHUNK_SIZE && x >= 0 &&
 		y < Consts::CHUNK_HEIGHT && y >= 0 &&
 		z < Consts::CHUNK_SIZE && z >= 0)
-		return !!m_data.blocks[translateIndex(x, y, z)];
+		return m_data.blocks[translateIndex(x, y, z)].get();
 
 	return false;
 }

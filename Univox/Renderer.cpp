@@ -53,7 +53,7 @@ void Renderer::create()
 	}
 
 	static WE::Sampler sampler;
-	sampler.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	sampler.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 	sampler.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampler.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampler.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -62,6 +62,8 @@ void Renderer::create()
 	sampler.MaxLOD = D3D11_FLOAT32_MAX;
 	sampler.create();
 
+	textureAtlas.load("..\\bin\\mods\\Vanilla\\atlas.png");
+
 	materialLoader.loadAllFrom("../resources/", &sampler);
 
 	materialHandler.addMaterial("Wiremat", wireframeStates);
@@ -69,6 +71,7 @@ void Renderer::create()
 
 	materialHandler.addMaterial("Default", defaultStates);
 	materialHandler.getMaterial("Default")->albedoValue = { 0.f, 1.f, 0.5f };
+	materialHandler.getMaterial("Default")->setAlbedoTexture(&textureAtlas, &sampler);
 }
 
 void Renderer::destroy()

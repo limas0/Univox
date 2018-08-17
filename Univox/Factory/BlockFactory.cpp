@@ -7,7 +7,12 @@ BlockFactory::BlockFactory(IBlock *blockTemplate)
 
 BlockFactory::~BlockFactory()
 {
-	if(m_blockTemplate)
+	
+}
+
+void BlockFactory::destroy()
+{
+	if (m_blockTemplate)
 		delete m_blockTemplate;
 	m_blockTemplate = nullptr;
 }

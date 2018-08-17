@@ -9,6 +9,8 @@ DLL_EXPORT void onLoad()
 
 DLL_EXPORT void onInit(InitWrapper *wrapper)
 {
+	DirtBlockProperties::model.tex = { 0.f, 0.f, 1.f, 1.f };
+
 	auto &blockRegistry = wrapper->getBlockRegistry();
 	blockRegistry.registerBlock<DirtBlockProperties>(new DirtBlock());
 

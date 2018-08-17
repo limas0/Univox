@@ -5,6 +5,7 @@
 #include <execution>
 #include "..\..\Utils\Metadata.h"
 #include <iostream>
+#include "..\..\Game.h"
 
 ChunkData::ChunkData()
 {
@@ -74,24 +75,27 @@ void ChunkData::serialize(ByteBuffer &outData) const
 
 bool ChunkData::deserialize(ByteBuffer &inData)
 {
-	/*int size = 0;
-	inData >> size;
-	std::cout << size << std::endl;*/
+	auto &blockReg = GAME->getBlockRegistry();
 
-	for (int i = 0; i < 1; ++i)
+	std::string id;
+
+	for (int i = 0; i < blocks.size(); ++i)
 	{
 		Metadata met;
 		ByteBuffer buffer;
-		std::string cos;
+
 		inData >> buffer;
-		buffer >> cos;
+		buffer >> id;
 		met.deserialize(buffer);
-		
-		int temp = 0;
-		buffer >> temp;
-		std::cout << met.getProperty("into") << std::endl;
+
+		auto blockFactory = blockReg.get(id);
+		if (blockFactory)
+		{
+			blocks[i].reset(blockFactory->createNew());
+			reinterpret_cast<Block<BlockProperties>*>(blocks[i].get())->metadata = met;
+		}
 	}
-	
+
 	return true;
 }
 

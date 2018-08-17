@@ -9,11 +9,10 @@ public:
 	InitWrapper();
 	~InitWrapper();
 
-	void create(Game *instance);
+	void create();
 	void destory();
 
 	BlockRegistry &getBlockRegistry();
 
-private:
-	Game *p_game = nullptr;
+	BlockRegistry *p_blockRegistry = nullptr;
 };

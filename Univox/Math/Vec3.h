@@ -1,4 +1,5 @@
 #pragma once
+#include "..\API.h"
 
 template<typename T>
 struct Vec3

@@ -8,6 +8,8 @@ public:
 	BlockFactory(IBlock *blockTemplate);
 	~BlockFactory();
 
+	void destroy();
+
 	IBlock *createNew();
 
 private:

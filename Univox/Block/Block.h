@@ -14,6 +14,9 @@ public:
 	virtual Block *clone() const;
 	virtual inline size_t size() const;
 
+	virtual std::string getId() const;
+	virtual BlockModel &getBlockModel() const;
+
 	void serialize(ByteBuffer &outData) const;
 	bool deserialize(ByteBuffer &inData);
 
@@ -30,6 +33,18 @@ template<typename T>
 inline size_t Block<T>::size() const
 {
 	return sizeof(*this);
+}
+
+template<typename T>
+inline std::string Block<T>::getId() const
+{
+	return "elo";
+}
+
+template<typename T>
+inline BlockModel &Block<T>::getBlockModel() const
+{
+	return T::model;
 }
 
 template<typename T>

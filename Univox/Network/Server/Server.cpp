@@ -1,7 +1,8 @@
 #include "Server.h"
-#include "../PacketChunkData.h"
-#include "../../World/WorldConstants.h"
-#include "../../World/Chunk/Chunk.h"
+#include "..\PacketChunkData.h"
+#include "..\..\World\WorldConstants.h"
+#include "..\..\World\Chunk\Chunk.h"
+#include "..\..\Wrapper\InitWrapper.h"
 
 Server::Server()
 {
@@ -17,6 +18,17 @@ void Server::create()
 {
 	dispatcher.create(this);
 	dispatcher.registerPacket<PacketChunkData>();
+
+	modLoader.load(&modHandler);
+	blockRegistry.create(&modHandler);
+
+	InitWrapper initWrapper;
+	initWrapper.p_blockRegistry = &blockRegistry;
+	initWrapper.create();
+
+	modHandler.initAll(&initWrapper);
+
+	initWrapper.destory();
 }
 
 void Server::destroy()
@@ -75,6 +87,7 @@ void Server::loop()
 			static int el = 0;
 
 			PacketChunkData test;
+			//test.chunk.blocks[Chunk::translateIndex(0, 0, 0)].reset(blockRegistry.get("vanilla:dirt")->createNew());
 			test.index = { 0, 0 };
 
 			for (int i = 0; i < Consts::CHUNK_SIZE; i++)
@@ -83,7 +96,8 @@ void Server::loop()
 				{
 					for (int k = 0; k < Consts::CHUNK_SIZE; k++)
 					{
-						//test.chunk.blocks[Chunk::translateIndex(i, j, k)] = el == j;
+						if(std::rand()%10 == 0)
+							test.chunk.blocks[Chunk::translateIndex(i, j, k)].reset(blockRegistry.get("vanilla:dirt")->createNew());
 					}
 				}
 			}

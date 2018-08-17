@@ -7,6 +7,8 @@
 #include "Block\Block.h"
 #include "Block\BlockProperties.h"
 
+#include "Texture\TextureAtlas.h"
+
 Game *Game::game = nullptr;
 
 Game::Game()
@@ -20,12 +22,28 @@ Game::~Game()
 
 void Game::create()
 {
+	TextureAtlas atlas;
+	atlas.create();
+	atlas.destroy();
+
+	modLoader.load(&modHandler);
+	modHandler.loadAll();
+
 	window.create("Univox", 1280, 720);
 	renderer.create();
 
 	auto &sceneHandler = renderer.getEngine().getSceneHandler();
-
 	worldRenderer.create(reinterpret_cast<WorldScene*>(sceneHandler.addScene("World", new WorldScene())));
+
+	blockRegistry.create(&modHandler);
+
+	InitWrapper initWrapper;
+	initWrapper.p_blockRegistry = &blockRegistry;
+	initWrapper.create();
+
+	modHandler.initAll(&initWrapper);
+
+	initWrapper.destory();
 
 	player.create();
 	worldRenderer.getScene()->setActiveCamera(player.getCamera());
@@ -49,27 +67,15 @@ void Game::create()
 
 		worldRenderer.setChunkMesh(chunkMesh);
 	}
-
-	blockRegistry.create(&modHandler);
-
-	modLoader.load(&modHandler);
-
-	modHandler.loadAll();
-
-	InitWrapper initWrapper;
-	initWrapper.create(this);
-
-	modHandler.initAll(&initWrapper);
-
-	initWrapper.destory();
 }
 
 void Game::destroy()
 {
-	modHandler.destroy();
-	blockRegistry.destroy();
 	world.destroy();
 	player.destroy();
+	blockRegistry.destroy();
+	modHandler.destroy();
+
 	worldRenderer.destroy();
 	renderer.destroy();
 	window.destroy();
@@ -114,6 +120,8 @@ void Game::run()
 			if (msg.is(WM_QUIT))
 				window.close();
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 
 	peekMessageThread.join();

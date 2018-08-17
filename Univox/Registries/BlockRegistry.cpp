@@ -6,12 +6,7 @@ BlockRegistry::BlockRegistry()
 
 BlockRegistry::~BlockRegistry()
 {
-	for(auto iter = registry.begin(); iter != registry.end(); ++iter)
-	{
-		if (iter->second)
-			delete iter->second;
-		iter->second = nullptr;
-	}
+	destroy();
 }
 
 void BlockRegistry::create(ModHandler *modHandler)
@@ -21,4 +16,10 @@ void BlockRegistry::create(ModHandler *modHandler)
 
 void BlockRegistry::destroy()
 {
+	for (auto iter = registry.begin(); iter != registry.end(); ++iter)
+	{
+		iter->second.destroy();
+	}
+
+	registry.clear();
 }
